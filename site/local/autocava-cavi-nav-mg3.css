@@ -127,8 +127,21 @@ body.autocava-cavi-fallback-open #autocava-cavi-fallback-drawer {
 .autocava-cavi-drawer-body {
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 16px;
+  overflow: hidden;
+}
+
+.autocava-cavi-thread {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   overflow: auto;
+  padding-right: 2px;
 }
 
 .autocava-cavi-message {
@@ -141,10 +154,21 @@ body.autocava-cavi-fallback-open #autocava-cavi-fallback-drawer {
   box-shadow: 0 2px 10px rgb(0 0 0 / 5%);
 }
 
+.autocava-cavi-message-user {
+  align-self: flex-end;
+  max-width: 82%;
+  background: #fff;
+}
+
+.autocava-cavi-message-assistant {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
 .autocava-cavi-options {
   display: grid;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 2px;
 }
 
 .autocava-cavi-options button {
@@ -157,6 +181,45 @@ body.autocava-cavi-fallback-open #autocava-cavi-fallback-drawer {
   text-align: left;
   font-size: 14px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+}
+
+.autocava-cavi-composer {
+  flex: 0 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 8px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+}
+
+.autocava-cavi-composer input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #222;
+  font-size: 15px;
+  padding: 0 48px 0 8px;
+}
+
+.autocava-cavi-composer button {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #825aff, #f25ec7);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 40px;
 }
 
 .autocava-mg3-card-list {
