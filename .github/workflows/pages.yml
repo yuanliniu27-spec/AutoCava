@@ -28,6 +28,9 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Generate SPA route indexes
+        run: python3 scripts/generate_spa_route_indexes.py
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
