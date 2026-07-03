@@ -59,6 +59,9 @@ def main() -> int:
 
     for route in routes:
         output = root.joinpath(*route.strip("/").split("/")) / "index.html"
+        if output.exists():
+            print(f"Skipped existing {route}")
+            continue
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(html, encoding="utf-8")
 
