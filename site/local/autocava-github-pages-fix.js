@@ -6,9 +6,6 @@
 
   function withBase(path) {
     if (!isGithubPages || !path || path.indexOf("/") !== 0 || path.indexOf(GITHUB_BASE + "/") === 0) return path;
-    if (/^\/(api|car|user|activity|live|rank|brand|city|series|model|loan|clue|pk|placement|i18n|_nuxt_icon)\//.test(path)) {
-      return path;
-    }
     return GITHUB_BASE + path;
   }
 
