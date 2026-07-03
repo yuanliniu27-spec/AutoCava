@@ -1,0 +1,1229 @@
+{
+  "source": "https://demo.autocava.com.mx/",
+  "created_at": "2026-07-03T09:04:03Z",
+  "entry": "/Users/nyl/autocava-demo-download/index.html",
+  "original_html": "/Users/nyl/autocava-demo-download/original.html",
+  "downloaded_count": 242,
+  "downloaded": [
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/015.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/015.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/021.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/021.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/029.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/029.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/038.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/038.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/046.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/046.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/049.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/049.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/brand/logo/065.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/brand/logo/065.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/brand/4ff1d1b7f6044365bc3d9569bf90e4cd.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/car/brand/4ff1d1b7f6044365bc3d9569bf90e4cd.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/brand/ff5e137ab1604a8a9b1497195121badd.jpg:80x0",
+      "file": "site/cdn.autocava.com.mx/car/brand/ff5e137ab1604a8a9b1497195121badd.jpg:80x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/21f3ba391d844310a684b92b3199da88.png:240x0",
+      "file": "site/cdn.autocava.com.mx/car/series/21f3ba391d844310a684b92b3199da88.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/21f3ba391d844310a684b92b3199da88.png:300x0",
+      "file": "site/cdn.autocava.com.mx/car/series/21f3ba391d844310a684b92b3199da88.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/2ccca64add8e462d9bca5adc9404f8e4.png:240x0",
+      "file": "site/cdn.autocava.com.mx/car/series/2ccca64add8e462d9bca5adc9404f8e4.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/2ccca64add8e462d9bca5adc9404f8e4.png:300x0",
+      "file": "site/cdn.autocava.com.mx/car/series/2ccca64add8e462d9bca5adc9404f8e4.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/4d10f808e5894bc1a136e719e7747245.png:240x0",
+      "file": "site/cdn.autocava.com.mx/car/series/4d10f808e5894bc1a136e719e7747245.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/4d10f808e5894bc1a136e719e7747245.png:300x0",
+      "file": "site/cdn.autocava.com.mx/car/series/4d10f808e5894bc1a136e719e7747245.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/87bfccbc706c4e7fa2174f07b784baf3.png:240x0",
+      "file": "site/cdn.autocava.com.mx/car/series/87bfccbc706c4e7fa2174f07b784baf3.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/87bfccbc706c4e7fa2174f07b784baf3.png:300x0",
+      "file": "site/cdn.autocava.com.mx/car/series/87bfccbc706c4e7fa2174f07b784baf3.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/ad5caf237ea1445e8d74108c93919830.png:240x0",
+      "file": "site/cdn.autocava.com.mx/car/series/ad5caf237ea1445e8d74108c93919830.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/car/series/ad5caf237ea1445e8d74108c93919830.png:300x0",
+      "file": "site/cdn.autocava.com.mx/car/series/ad5caf237ea1445e8d74108c93919830.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/live/cover/1.png:600x0",
+      "file": "site/cdn.autocava.com.mx/live/cover/1.png:600x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/live/cover/2.png:600x0",
+      "file": "site/cdn.autocava.com.mx/live/cover/2.png:600x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/live/cover/3.png:600x0",
+      "file": "site/cdn.autocava.com.mx/live/cover/3.png:600x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/placement/d4c23914fac544359cf02e5372d3ad80.png:1800x0",
+      "file": "site/cdn.autocava.com.mx/placement/d4c23914fac544359cf02e5372d3ad80.png:1800x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0113.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0113.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0113.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0113.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0302.png:192x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0302.png:192x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0302.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0302.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0302.png:256x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0302.png:256x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0302.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0302.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0306.png:192x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0306.png:192x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0306.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0306.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0306.png:256x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0306.png:256x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0306.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0306.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0332.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0332.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0332.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0332.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0351.png:192x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0351.png:192x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0351.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0351.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0351.png:256x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0351.png:256x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0351.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0351.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0353.png:192x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0353.png:192x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0353.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0353.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0353.png:256x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0353.png:256x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0353.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0353.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0354.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0354.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0354.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0354.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0380.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0380.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0380.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0380.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0391.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0391.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0391.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0391.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0442.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0442.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0442.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0442.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0452.png:240x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0452.png:240x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://cdn.autocava.com.mx/series/white/0452.png:300x0",
+      "file": "site/cdn.autocava.com.mx/series/white/0452.png:300x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/Live.v3.Blg2BpNX.gif",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/Live.v3.Blg2BpNX.gif",
+      "content_type": "image/gif"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/MG_banner.v3.DvAnKC3-.webp:1800x0",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/MG_banner.v3.DvAnKC3-.webp:1800x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/PageFooter.v3.DHwyKjo5.css",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/PageFooter.v3.DHwyKjo5.css",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/ai.v3.tKG4KHyd.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/ai.v3.tKG4KHyd.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/avatar.v3.-qQORZq6.svg",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/avatar.v3.-qQORZq6.svg",
+      "content_type": "image/svg+xml"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/car.v3.Bftow3vq.svg:20x0",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/car.v3.Bftow3vq.svg:20x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/car.v3.Bftow3vq.svg:40x0",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/car.v3.Bftow3vq.svg:40x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/common.v3.B8cPvze9.css",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/common.v3.B8cPvze9.css",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/data.v3.B8DMyjl3.json",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/data.v3.B8DMyjl3.json",
+      "content_type": "application/json"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/index.v3.CNpyVLQI.css",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/index.v3.CNpyVLQI.css",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/live.v3.FN4eQB_E.svg:20x0",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/live.v3.FN4eQB_E.svg:20x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/live.v3.FN4eQB_E.svg:40x0",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/live.v3.FN4eQB_E.svg:40x0",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/logo.v3.C5ywaRjp.svg",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/logo.v3.C5ywaRjp.svg",
+      "content_type": "image/svg+xml"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/main.v3.d7ahWhvp.css",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/main.v3.d7ahWhvp.css",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/placeholder.v3.l569RKAV.svg",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/placeholder.v3.l569RKAV.svg",
+      "content_type": "image/svg+xml"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/builds/meta/18a53754-8c31-4b70-b966-d1775cd7c518.json",
+      "file": "site/uat-cdn.autocava.com/_nuxt/builds/meta/18a53754-8c31-4b70-b966-d1775cd7c518.json",
+      "content_type": "application/json"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/app.v3.BSpC6cVc.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/app.v3.BSpC6cVc.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.2dCJbmhT.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.2dCJbmhT.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.3pv65_2O.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.3pv65_2O.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BIWr03L8.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BIWr03L8.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BZcIQ-_R.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BZcIQ-_R.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Bn2-xhDt.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Bn2-xhDt.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.By51OA88.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.By51OA88.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C0zdOOTU.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C0zdOOTU.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CG9CZ2vd.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CG9CZ2vd.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CMXcBBIb.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CMXcBBIb.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C_2StLam.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C_2StLam.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Cat0fnd3.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Cat0fnd3.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CbpZvKIE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CbpZvKIE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Cdb-q4m1.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Cdb-q4m1.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CfqtkDlu.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CfqtkDlu.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CiEm42iI.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CiEm42iI.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CsccKtH5.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CsccKtH5.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Cvebvz_H.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Cvebvz_H.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DMrqsk59.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DMrqsk59.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DP2Qo3_8.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DP2Qo3_8.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DcjEWhlg.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DcjEWhlg.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Dct6dKvK.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Dct6dKvK.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Df6Dm5DE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Df6Dm5DE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DmHDkPqL.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DmHDkPqL.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DuXAYsuA.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DuXAYsuA.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Dw912PF0.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Dw912PF0.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DzOnxCIO.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DzOnxCIO.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.E2suN4ym.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.E2suN4ym.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.LSBVlhvu.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.LSBVlhvu.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.NbZyc324.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.NbZyc324.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.eW3nM9Z-.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.eW3nM9Z-.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.kU2a8w-R.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.kU2a8w-R.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.oibK72eP.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.oibK72eP.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/lib/google-fonts.css?v=v3",
+      "file": "site/uat-cdn.autocava.com/_nuxt/lib/google-fonts.css",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/site/favicon-180.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/site/favicon-180.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/site/favicon-48.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/site/favicon-48.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/site/favicon.ico",
+      "file": "site/uat-cdn.autocava.com/_nuxt/site/favicon.ico",
+      "content_type": "image/vnd.microsoft.icon"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/site/favicon.svg",
+      "file": "site/uat-cdn.autocava.com/_nuxt/site/favicon.svg",
+      "content_type": "image/svg+xml"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/site/manifest.json",
+      "file": "site/uat-cdn.autocava.com/_nuxt/site/manifest.json",
+      "content_type": "application/json"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/left.v3.C0gT6YcL.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/left.v3.C0gT6YcL.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/center.v3.gHoK8N8-.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/center.v3.gHoK8N8-.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/asset/right.v3.CFHX8xQX.png",
+      "file": "site/uat-cdn.autocava.com/_nuxt/asset/right.v3.CFHX8xQX.png",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3._Q_llJAc.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3._Q_llJAc.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.dBAPsJ-w.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.dBAPsJ-w.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B9wCsHKf.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B9wCsHKf.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D_6T3kmS.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D_6T3kmS.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C4agnKvi.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C4agnKvi.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Ce99EZVV.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Ce99EZVV.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D6FQZLjC.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D6FQZLjC.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.lUdWCZIK.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.lUdWCZIK.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.84Pb1cbu.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.84Pb1cbu.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.9dC4ASBd.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.9dC4ASBd.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D6s7Pqr1.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D6s7Pqr1.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D-v1GCy7.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D-v1GCy7.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.MrUHTE0x.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.MrUHTE0x.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.VHp_Pyda.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.VHp_Pyda.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DHLAmRmd.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DHLAmRmd.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DY_NCmr6.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DY_NCmr6.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CgoUpty5.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CgoUpty5.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B-tM36Ch.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B-tM36Ch.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Bi1ueuwV.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Bi1ueuwV.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CiYd6MaX.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CiYd6MaX.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CX5mP2Of.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CX5mP2Of.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C_8t_vVT.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C_8t_vVT.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CsWoH8YN.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CsWoH8YN.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.46zLKjkC.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.46zLKjkC.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CDFA41th.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CDFA41th.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BrZUkK7B.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BrZUkK7B.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BKLXoGWO.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BKLXoGWO.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BcrXTvEl.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BcrXTvEl.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.8yqWTAC8.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.8yqWTAC8.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.-3b6oQup.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.-3b6oQup.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.jDEFNjex.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.jDEFNjex.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DmJVl9nl.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DmJVl9nl.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BYQl6o3S.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BYQl6o3S.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.6n_CMMvn.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.6n_CMMvn.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Cv0gh-kM.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Cv0gh-kM.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.lsSlLZkX.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.lsSlLZkX.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DJADobSE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DJADobSE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.iCYnBoEs.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.iCYnBoEs.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DkDY6b_U.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DkDY6b_U.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D2r9J4U2.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D2r9J4U2.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.cxppdj7q.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.cxppdj7q.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DcHM_dmX.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DcHM_dmX.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BZckf4lf.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BZckf4lf.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.VRLdLG1r.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.VRLdLG1r.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.5yUMi8dd.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.5yUMi8dd.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.tW3tqSy3.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.tW3tqSy3.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BIrd9pFb.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BIrd9pFb.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DmJecLod.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DmJecLod.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.iHhILOcI.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.iHhILOcI.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B7qm2dEQ.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B7qm2dEQ.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.l8Ine-SZ.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.l8Ine-SZ.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DYz4toer.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DYz4toer.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B53bZV-d.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B53bZV-d.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Bwo1YtvX.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Bwo1YtvX.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3._j2AU1QF.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3._j2AU1QF.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CIH5JAQe.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CIH5JAQe.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DxxmVDc1.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DxxmVDc1.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BEMBcwjS.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BEMBcwjS.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DfmFQUO-.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DfmFQUO-.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C5YWlvO0.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C5YWlvO0.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B63Nfr91.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B63Nfr91.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DDcJ_AFa.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DDcJ_AFa.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.6HRvrmLH.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.6HRvrmLH.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Di5Yg9Kt.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Di5Yg9Kt.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.m0s7EudK.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.m0s7EudK.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B5mlxmyt.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B5mlxmyt.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CygmgyOY.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CygmgyOY.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CXStfBBA.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CXStfBBA.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CKrNfXhs.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CKrNfXhs.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.50wq-ByN.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.50wq-ByN.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DMv4MG26.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DMv4MG26.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BXEampZj.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BXEampZj.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B6tiVW6y.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B6tiVW6y.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.h03cWwGG.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.h03cWwGG.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.xEwqcUjc.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.xEwqcUjc.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CcRGv3BE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CcRGv3BE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.btd_uVG4.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.btd_uVG4.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Du5MsS6l.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Du5MsS6l.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C4taGPvu.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C4taGPvu.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BWgMvV9M.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BWgMvV9M.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.S4YDlnIY.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.S4YDlnIY.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BGsCXmXM.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BGsCXmXM.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.XEtkRNIE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.XEtkRNIE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BHc6PPLg.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BHc6PPLg.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.gXPotKXV.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.gXPotKXV.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/series/white/0336.png",
+      "file": "site/uat-cdn.autocava.com/series/white/0336.png",
+      "content_type": "binary/octet-stream"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuHT-k3Yk128O0g.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuHT-k3Yk128O0g.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuGb-k3Yk128O0g.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuGb-k3Yk128O0g.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuAb-k3Yk128O0g.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuAb-k3Yk128O0g.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuAj-k3Yk128.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQuAj-k3Yk128.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+      "file": "site/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/auto/series/356",
+      "file": "site/uat-cdn.autocava.com/auto/series/356",
+      "content_type": "text/html;charset=utf-8"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BIFgm6hV.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BIFgm6hV.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DV7Uwjjz.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DV7Uwjjz.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Dj2Kc9XK.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Dj2Kc9XK.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.M8XVGADY.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.M8XVGADY.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DDdTnyGH.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DDdTnyGH.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D9_JJrpW.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D9_JJrpW.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.eli56C3-.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.eli56C3-.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CdqAFVfg.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CdqAFVfg.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D5UJV_M0.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D5UJV_M0.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DLJBdvU7.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DLJBdvU7.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Cn08ncqL.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Cn08ncqL.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DxaUKFKD.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DxaUKFKD.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Dy0cKr_H.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Dy0cKr_H.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.olkDOpjP.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.olkDOpjP.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D0Ik7pYE.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D0Ik7pYE.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C77hbeq-.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C77hbeq-.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DcbUdEfL.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DcbUdEfL.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BOHV0Gbx.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BOHV0Gbx.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.D9NVq7a1.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.D9NVq7a1.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CN9plRDP.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CN9plRDP.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CPUIBI93.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CPUIBI93.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DM7NiITd.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DM7NiITd.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DsUG7Z-r.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DsUG7Z-r.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DdsviUL3.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DdsviUL3.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.CxKMZCKh.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.CxKMZCKh.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B_pudoQz.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B_pudoQz.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.Bm0JM7MR.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.Bm0JM7MR.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.jdZ3CBt6.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.jdZ3CBt6.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.BCbHQWBC.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.BCbHQWBC.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.C3r53Jwb.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.C3r53Jwb.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DxDZyS-s.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DxDZyS-s.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.PdSYDZbJ.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.PdSYDZbJ.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.86eAppZb.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.86eAppZb.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.B7bCEHyz.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.B7bCEHyz.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DRf-53yV.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DRf-53yV.js",
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://uat-cdn.autocava.com/_nuxt/js/v3.DYX6gwWo.js",
+      "file": "site/uat-cdn.autocava.com/_nuxt/js/v3.DYX6gwWo.js",
+      "content_type": "application/javascript"
+    }
+  ],
+  "external_or_data_links_preserved": [
+    "https://fonts.gstatic.com",
+    "https://uat-cdn.autocava.com",
+    "https://uat-cdn.autocava.com/assets/images/rank/1.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/1.svg",
+    "https://uat-cdn.autocava.com/assets/images/rank/2.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/2.svg",
+    "https://uat-cdn.autocava.com/assets/images/rank/center.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/center.svg",
+    "https://uat-cdn.autocava.com/assets/images/rank/left.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/left.svg",
+    "https://uat-cdn.autocava.com/assets/images/rank/rankBg.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/rankBg.svg",
+    "https://uat-cdn.autocava.com/assets/images/rank/right.svg  # download failed: HTTP Error 404: Page not found: /assets/images/rank/right.svg"
+  ]
+}
