@@ -2,7 +2,7 @@
   if (window.__autocavaCaviNavInstalled) return;
   window.__autocavaCaviNavInstalled = true;
 
-  var ICON_SRC = "/site/local/cavi-nav.png";
+  var ICON_SRC = "site/local/cavi-nav.png";
   var DESKTOP_ID = "autocava-cavi-nav-desktop";
   var MOBILE_ID = "autocava-cavi-nav-mobile";
   var MG3_SERIES_URL = "/auto/series/336";
@@ -55,7 +55,7 @@
       '<a class="autocava-mg3-card autocava-mg3-card-primary" href="' + MG3_SERIES_URL + '">',
       '<span class="autocava-mg3-rank">#1</span>',
       '<span class="autocava-mg3-body">',
-      '<img src="/site/cdn.autocava.com.mx/series/white/0336.png:240x0" alt="MG MG3">',
+      '<img src="site/cdn.autocava.com.mx/series/white/0336.png:240x0" alt="MG MG3">',
       '<span class="autocava-mg3-copy">',
       '<strong>MG MG3</strong>',
       '<span>Desde: <b>$4,146</b> /mes</span>',
@@ -67,7 +67,7 @@
       '<a class="autocava-mg3-card" href="/auto/series/354">',
       '<span class="autocava-mg3-rank">#2</span>',
       '<span class="autocava-mg3-body">',
-      '<img src="/site/cdn.autocava.com.mx/series/white/0354.png:240x0" alt="Nissan March">',
+      '<img src="site/cdn.autocava.com.mx/series/white/0354.png:240x0" alt="Nissan March">',
       '<span class="autocava-mg3-copy">',
       '<strong>Nissan March</strong>',
       '<span>Desde: <b>$4,927</b> /mes</span>',

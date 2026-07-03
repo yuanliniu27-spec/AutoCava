@@ -53,7 +53,7 @@
       '<a href="/auto/series/332" style="display:grid;gap:9px;padding:12px;border-radius:12px;background:#fff;color:#222;text-decoration:none;box-shadow:0 8px 22px rgb(0 0 0 / 6%)">',
       '<span style="font-size:13px;font-weight:700">MG5</span>',
       '<span style="display:grid;grid-template-columns:84px minmax(0,1fr);align-items:center;gap:12px">',
-      '<img src="/site/cdn.autocava.com.mx/series/white/0332.png:240x0" alt="MG MG5" style="width:84px;height:54px;object-fit:contain">',
+      '<img src="site/cdn.autocava.com.mx/series/white/0332.png:240x0" alt="MG MG5" style="width:84px;height:54px;object-fit:contain">',
       '<span style="display:grid;gap:3px;font-size:12px;line-height:1.25">',
       '<strong style="font-size:13px;text-transform:uppercase">MG MG5</strong>',
       '<span>Desde: <b style="font-size:16px">$4,411</b> /mes</span>',
