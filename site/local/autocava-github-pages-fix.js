@@ -113,8 +113,21 @@
       '</svg>';
   }
 
+  function isSeriesPage() {
+    return location.pathname.indexOf("/auto/series/") !== -1 || location.pathname.indexOf(GITHUB_BASE + "/auto/series/") !== -1;
+  }
+
+  function seriesIconSvg(name) {
+    var icons = {
+      back: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      home: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 10.8 12 4l8.5 6.8v8.7a1.5 1.5 0 0 1-1.5 1.5h-4.2v-5.7H9.2V21H5a1.5 1.5 0 0 1-1.5-1.5v-8.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+      calculator: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3.8" width="14" height="16.4" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 8.2h4.4M10.4 6v4.4M15.2 8.2h2.2M8.2 14.8h3.2M14 13.5l3.1 3.1M17.1 13.5 14 16.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    };
+    return icons[name] || "";
+  }
+
   function normalizeSeriesFavoriteIcons() {
-    if (location.pathname.indexOf("/auto/series/") === -1 && location.pathname.indexOf(GITHUB_BASE + "/auto/series/") === -1) return;
+    if (!isSeriesPage()) return;
     document.querySelectorAll(".remove-fav-fly-source").forEach(function (source) {
       var button = source.closest("button,a") || source.parentElement;
       if (!button) return;
@@ -125,23 +138,98 @@
     });
   }
 
+  function findSeriesActionBar() {
+    var visitLinks = Array.prototype.slice.call(document.querySelectorAll('a[href*="/visit"]'));
+    var candidates = [];
+    visitLinks.forEach(function (link) {
+      var node = link.parentElement;
+      while (node && node !== document.body) {
+        var text = (node.textContent || "").replace(/\s+/g, " ");
+        if (text.indexOf("Prueba de manejo") !== -1) {
+          var rect = node.getBoundingClientRect();
+          if (rect.height > 36 && rect.height < 180 && rect.width > 220) {
+            candidates.push({ node: node, area: rect.width * rect.height });
+          }
+        }
+        node = node.parentElement;
+      }
+    });
+    candidates.sort(function (a, b) { return a.area - b.area; });
+    return candidates.length ? candidates[0].node : null;
+  }
+
   function ensureSeriesFavoriteButton() {
-    if (location.pathname.indexOf("/auto/series/") === -1 && location.pathname.indexOf(GITHUB_BASE + "/auto/series/") === -1) return;
+    if (!isSeriesPage()) return;
     normalizeSeriesFavoriteIcons();
-    var bars = Array.prototype.slice.call(document.querySelectorAll("div"));
-    var actionBar = bars.find(function (bar) {
-      return bar.textContent && bar.textContent.indexOf("Prueba de manejo") !== -1 && bar.querySelector('a[href*="/visit"]');
+    var actionBar = findSeriesActionBar();
+    document.querySelectorAll("#__MStarApp > .autocava-series-fav-fallback").forEach(function (button) {
+      if (actionBar) actionBar.insertBefore(button, actionBar.firstElementChild);
+      else button.remove();
     });
     if (!actionBar) return;
     actionBar.classList.add("autocava-series-actionbar");
     if (!actionBar.querySelector(".autocava-series-fav-fallback")) {
-      var button = document.createElement("button");
-      button.type = "button";
+      var first = actionBar.firstElementChild;
+      var button = first && !(first.matches && first.matches('a[href*="/visit"]')) && (first.textContent || "").trim() === "" ? first : document.createElement("button");
+      if (button.tagName === "BUTTON") button.type = "button";
       button.className = "autocava-series-fav-fallback autocava-series-fav-button";
       button.setAttribute("aria-label", "Agregar a favoritos");
       button.innerHTML = favoriteSvg();
-      actionBar.insertBefore(button, actionBar.firstElementChild);
+      if (!button.parentElement) actionBar.insertBefore(button, actionBar.firstElementChild);
     }
+  }
+
+  function ensureSeriesCalculatorIcon() {
+    if (!isSeriesPage()) return;
+    Array.prototype.slice.call(document.querySelectorAll("a,button,div")).forEach(function (node) {
+      var text = (node.textContent || "").replace(/\s+/g, " ").trim();
+      if (text !== "Calculadora" || node.querySelector(".autocava-series-calculator-icon")) return;
+      node.classList.add("autocava-series-calculator-card");
+      var icon = document.createElement("span");
+      icon.className = "autocava-series-calculator-icon";
+      icon.innerHTML = seriesIconSvg("calculator");
+      node.insertBefore(icon, node.firstChild);
+    });
+  }
+
+  function ensureSeriesMobileHeader() {
+    if (!isSeriesPage() || !window.matchMedia || !window.matchMedia("(max-width: 767px)").matches) return;
+    var headerBox = document.querySelector("#page-header .page-header-box") ||
+      document.querySelector("#page-header .h-14") ||
+      document.querySelector("#page-header header");
+    if (!headerBox || headerBox.querySelector(".autocava-series-header-left")) return;
+    headerBox.classList.add("autocava-series-mobile-header");
+
+    var left = document.createElement("span");
+    left.className = "autocava-series-header-left";
+
+    var back = document.createElement("button");
+    back.type = "button";
+    back.className = "autocava-series-header-icon";
+    back.setAttribute("aria-label", "Volver");
+    back.innerHTML = seriesIconSvg("back");
+    back.addEventListener("click", function () {
+      if (history.length > 1) history.back();
+      else location.href = withBase("/");
+    });
+
+    var home = document.createElement("a");
+    home.className = "autocava-series-header-icon";
+    home.setAttribute("aria-label", "Inicio");
+    home.href = withBase("/");
+    home.innerHTML = seriesIconSvg("home");
+
+    left.appendChild(back);
+    left.appendChild(home);
+
+    var fav = document.createElement("button");
+    fav.type = "button";
+    fav.className = "autocava-series-header-icon autocava-series-header-fav autocava-series-fav-button";
+    fav.setAttribute("aria-label", "Agregar a favoritos");
+    fav.innerHTML = favoriteSvg();
+
+    headerBox.insertBefore(left, headerBox.firstChild);
+    headerBox.appendChild(fav);
   }
 
   function bindSeriesFavoriteState() {
@@ -241,6 +329,8 @@
     fixStaticUrls(root);
     hydrateLazyImages(root);
     ensureSeriesFavoriteButton();
+    ensureSeriesCalculatorIcon();
+    ensureSeriesMobileHeader();
     bindSeriesFavoriteState();
     ensureBottomNavIcons();
     loadMessages().then(function (messages) {

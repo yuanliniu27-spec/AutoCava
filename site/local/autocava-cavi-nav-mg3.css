@@ -145,6 +145,90 @@
   gap: 8px;
 }
 
+.autocava-series-mobile-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 86px !important;
+  background: #ffcf20 !important;
+  color: #222 !important;
+}
+
+.autocava-series-header-left {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(-50%);
+}
+
+.autocava-series-header-icon {
+  appearance: none;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: #222 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  text-decoration: none !important;
+}
+
+.autocava-series-header-icon svg {
+  width: 28px !important;
+  height: 28px !important;
+  display: block !important;
+}
+
+.autocava-series-header-fav {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.autocava-series-header-fav svg {
+  width: 30px !important;
+  height: 28px !important;
+}
+
+.autocava-series-calculator-card {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+.autocava-series-calculator-card > svg,
+.autocava-series-calculator-card > img {
+  display: none !important;
+}
+
+.autocava-series-calculator-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #40360f;
+  line-height: 0;
+}
+
+.autocava-series-calculator-icon svg {
+  width: 32px !important;
+  height: 32px !important;
+  display: block !important;
+}
+
 .autocava-series-fav-button {
   --autocava-fav-fill: #fff;
   width: 48px !important;
@@ -192,6 +276,26 @@
   stroke-width: 1.2 !important;
   stroke-linejoin: round !important;
   transition: fill .16s ease;
+}
+
+.autocava-series-header-fav.autocava-series-fav-button {
+  --autocava-fav-fill: transparent;
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  flex: 0 0 38px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.autocava-series-header-fav.autocava-series-fav-button:hover,
+.autocava-series-header-fav.autocava-series-fav-button:focus-visible,
+.autocava-series-header-fav.autocava-series-fav-button:active,
+.autocava-series-header-fav.autocava-series-fav-button.autocava-fav-active {
+  --autocava-fav-fill: #fff6dc;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .autocava-series-fav-fallback {
