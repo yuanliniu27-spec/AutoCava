@@ -145,6 +145,55 @@
   gap: 8px;
 }
 
+.autocava-series-fav-button {
+  --autocava-fav-fill: #fff;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  flex: 0 0 48px !important;
+  border: 1px solid #d6d6d6 !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 6%) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  color: #222 !important;
+  transition: background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+.autocava-series-fav-button:hover,
+.autocava-series-fav-button:focus-visible,
+.autocava-series-fav-button:active,
+.autocava-series-fav-button.autocava-fav-active,
+.autocava-series-fav-button[aria-pressed="true"],
+.autocava-series-fav-button[data-state="checked"] {
+  --autocava-fav-fill: #fff6dc;
+  border-color: #d6d6d6 !important;
+  background: #fff !important;
+}
+
+.autocava-series-fav-button:active {
+  transform: scale(.98);
+}
+
+.autocava-series-fav-button svg,
+.autocava-series-fav-icon {
+  width: 24px !important;
+  height: 22px !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.autocava-series-fav-button svg path {
+  fill: var(--autocava-fav-fill, #fff) !important;
+  stroke: #222 !important;
+  stroke-width: 1.2 !important;
+  stroke-linejoin: round !important;
+  transition: fill .16s ease;
+}
+
 .autocava-series-fav-fallback {
   appearance: none;
   width: 48px;

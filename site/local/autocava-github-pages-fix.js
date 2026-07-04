@@ -94,12 +94,25 @@
 
   function favoriteSvg() {
     return '<svg viewBox="0 0 20 18" aria-hidden="true" focusable="false">' +
-      '<path d="M10.9046 15.9356C10.1642 16.6046 9.0325 16.5983 8.29461 15.9266C3.65961 11.7236 0.599609 8.95161 0.599609 5.54961C0.599609 2.77761 2.77761 0.599609 5.54961 0.599609C7.11561 0.599609 8.61861 1.32861 9.59961 2.48061C10.5806 1.32861 12.0836 0.599609 13.6496 0.599609C16.4216 0.599609 18.5996 2.77761 18.5996 5.54961C18.5996 8.95161 15.5396 11.7236 10.9046 15.9356Z" fill="none" stroke="#222" stroke-width="1.2" stroke-linejoin="round"/>' +
+      '<path d="M10.9046 15.9356C10.1642 16.6046 9.0325 16.5983 8.29461 15.9266C3.65961 11.7236 0.599609 8.95161 0.599609 5.54961C0.599609 2.77761 2.77761 0.599609 5.54961 0.599609C7.11561 0.599609 8.61861 1.32861 9.59961 2.48061C10.5806 1.32861 12.0836 0.599609 13.6496 0.599609C16.4216 0.599609 18.5996 2.77761 18.5996 5.54961C18.5996 8.95161 15.5396 11.7236 10.9046 15.9356Z" fill="var(--autocava-fav-fill, #fff)" stroke="#222" stroke-width="1.2" stroke-linejoin="round"/>' +
       '</svg>';
+  }
+
+  function normalizeSeriesFavoriteIcons() {
+    if (location.pathname.indexOf("/auto/series/") === -1 && location.pathname.indexOf(GITHUB_BASE + "/auto/series/") === -1) return;
+    document.querySelectorAll(".remove-fav-fly-source").forEach(function (source) {
+      var button = source.closest("button,a") || source.parentElement;
+      if (!button) return;
+      button.classList.add("autocava-series-fav-button");
+      button.setAttribute("aria-label", button.getAttribute("aria-label") || "Agregar a favoritos");
+      var svg = source.querySelector("svg");
+      if (svg) svg.classList.add("autocava-series-fav-icon");
+    });
   }
 
   function ensureSeriesFavoriteButton() {
     if (location.pathname.indexOf("/auto/series/") === -1 && location.pathname.indexOf(GITHUB_BASE + "/auto/series/") === -1) return;
+    normalizeSeriesFavoriteIcons();
     var bars = Array.prototype.slice.call(document.querySelectorAll("div"));
     var actionBar = bars.find(function (bar) {
       return bar.textContent && bar.textContent.indexOf("Prueba de manejo") !== -1 && bar.querySelector('a[href*="/visit"]');
@@ -109,11 +122,21 @@
     if (!actionBar.querySelector(".autocava-series-fav-fallback")) {
       var button = document.createElement("button");
       button.type = "button";
-      button.className = "autocava-series-fav-fallback";
-      button.setAttribute("aria-label", "Mis favoritos");
+      button.className = "autocava-series-fav-fallback autocava-series-fav-button";
+      button.setAttribute("aria-label", "Agregar a favoritos");
       button.innerHTML = favoriteSvg();
       actionBar.insertBefore(button, actionBar.firstElementChild);
     }
+  }
+
+  function bindSeriesFavoriteState() {
+    if (document.documentElement.dataset.autocavaFavBound === "true") return;
+    document.documentElement.dataset.autocavaFavBound = "true";
+    document.addEventListener("click", function (event) {
+      var button = event.target && event.target.closest && event.target.closest(".autocava-series-fav-button");
+      if (!button) return;
+      button.classList.toggle("autocava-fav-active");
+    });
   }
 
   function bottomNavIcon(label) {
@@ -163,6 +186,7 @@
   function applyFixes(root) {
     fixStaticUrls(root);
     ensureSeriesFavoriteButton();
+    bindSeriesFavoriteState();
     ensureBottomNavIcons();
     loadMessages().then(function (messages) {
       replaceTextNodes(document.body, messages);
