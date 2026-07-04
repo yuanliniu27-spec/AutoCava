@@ -177,6 +177,13 @@
     img.height = 35;
     button.appendChild(img);
 
+    if (id === MOBILE_ID) {
+      var text = document.createElement("span");
+      text.className = "autocava-cavi-label";
+      text.textContent = "Cavi";
+      button.appendChild(text);
+    }
+
     return button;
   }
 

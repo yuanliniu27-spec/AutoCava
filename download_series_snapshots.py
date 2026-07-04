@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path("/Users/nyl/autocava-demo-download")
 SNAPSHOT_DIR = ROOT / "snapshots"
-SERIES_IDS = ("332", "336", "337", "338", "351", "354", "359", "552", "884")
+SERIES_IDS = ("332", "336", "337", "338", "351", "354", "359", "552", "586", "884")
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
 
 

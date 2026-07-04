@@ -117,13 +117,38 @@
     return location.pathname.indexOf("/auto/series/") !== -1 || location.pathname.indexOf(GITHUB_BASE + "/auto/series/") !== -1;
   }
 
+  function removeMisplacedSeriesFavoriteButtons() {
+    document.querySelectorAll("#__MStarApp > .autocava-series-fav-fallback").forEach(function (button) {
+      button.remove();
+    });
+  }
+
   function seriesIconSvg(name) {
     var icons = {
       back: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       home: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 10.8 12 4l8.5 6.8v8.7a1.5 1.5 0 0 1-1.5 1.5h-4.2v-5.7H9.2V21H5a1.5 1.5 0 0 1-1.5-1.5v-8.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
-      calculator: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3.8" width="14" height="16.4" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 8.2h4.4M10.4 6v4.4M15.2 8.2h2.2M8.2 14.8h3.2M14 13.5l3.1 3.1M17.1 13.5 14 16.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+      calculator: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3.8" width="14" height="16.4" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 8.2h4.4M10.4 6v4.4M15.2 8.2h2.2M8.2 14.8h3.2M14 13.5l3.1 3.1M17.1 13.5 14 16.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      favorite: favoriteSvg()
     };
     return icons[name] || "";
+  }
+
+  function restoreSvg(svg, name) {
+    if (!svg || svg.dataset.autocavaSvgRestored === name) return;
+    var wrapper = document.createElement("span");
+    wrapper.innerHTML = seriesIconSvg(name);
+    var source = wrapper.firstElementChild;
+    if (!source) return;
+    svg.setAttribute("viewBox", source.getAttribute("viewBox"));
+    svg.removeAttribute("aria-hidden");
+    svg.setAttribute("role", "img");
+    svg.innerHTML = source.innerHTML;
+    svg.classList.add("autocava-series-restored-icon");
+    svg.classList.remove("text-transparent");
+    svg.style.color = "#222";
+    svg.style.opacity = "1";
+    svg.style.display = "block";
+    svg.dataset.autocavaSvgRestored = name;
   }
 
   function normalizeSeriesFavoriteIcons() {
@@ -188,7 +213,10 @@
   }
 
   function ensureSeriesFavoriteButton() {
-    if (!isSeriesPage()) return;
+    if (!isSeriesPage()) {
+      removeMisplacedSeriesFavoriteButtons();
+      return;
+    }
     normalizeSeriesFavoriteIcons();
     var actionBar = findSeriesActionBar();
     var heroFavoriteButton = findSeriesHeroFavoriteButton();
@@ -221,12 +249,26 @@
     if (!isSeriesPage()) return;
     Array.prototype.slice.call(document.querySelectorAll("a,button,div")).forEach(function (node) {
       var text = (node.textContent || "").replace(/\s+/g, " ").trim();
-      if (text !== "Calculadora" || node.querySelector(".autocava-series-calculator-icon")) return;
+      if (text !== "Calculadora") return;
       node.classList.add("autocava-series-calculator-card");
+      var existingSvg = node.querySelector("svg");
+      if (existingSvg) restoreSvg(existingSvg, "calculator");
+      if (node.querySelector(".autocava-series-calculator-icon")) return;
       var icon = document.createElement("span");
       icon.className = "autocava-series-calculator-icon";
       icon.innerHTML = seriesIconSvg("calculator");
       node.insertBefore(icon, node.firstChild);
+    });
+  }
+
+  function ensureSeriesExistingSvgIcons() {
+    if (!isSeriesPage()) return;
+    var headerSvgs = Array.prototype.slice.call(document.querySelectorAll("#page-header .page-header-left svg"));
+    if (headerSvgs[0]) restoreSvg(headerSvgs[0], "back");
+    if (headerSvgs[1]) restoreSvg(headerSvgs[1], "home");
+    restoreSvg(document.getElementById("favHeaderFavIcon"), "favorite");
+    document.querySelectorAll(".remove-fav-fly-source svg").forEach(function (svg) {
+      restoreSvg(svg, "favorite");
     });
   }
 
@@ -368,6 +410,7 @@
     hydrateLazyImages(root);
     ensureSeriesFavoriteButton();
     ensureSeriesCalculatorIcon();
+    ensureSeriesExistingSvgIcons();
     ensureSeriesMobileHeader();
     bindSeriesFavoriteState();
     ensureBottomNavIcons();
