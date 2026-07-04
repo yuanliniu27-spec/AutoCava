@@ -362,12 +362,24 @@
 
 .autocava-bottom-nav-fixed .autocava-bottom-nav-pill {
   min-width: 0;
+  height: auto;
   display: inline-flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 3px !important;
+  gap: 2px !important;
   color: #222;
+}
+
+.autocava-bottom-nav-fixed .autocava-bottom-nav-item > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.autocava-bottom-nav-fixed .autocava-bottom-nav-pill > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.1 !important;
 }
 
 .autocava-bottom-nav-fixed .router-link-active.autocava-bottom-nav-item,
@@ -400,7 +412,7 @@
   color: #222;
   line-height: 0;
   pointer-events: none;
-  margin-bottom: 1px;
+  margin-bottom: 0;
 }
 
 .autocava-bottom-nav-icon svg {
