@@ -4,6 +4,13 @@
   var messagesPromise = null;
   var pending = 0;
 
+  function applyMobileMode() {
+    var isMobile = window.matchMedia && window.matchMedia("(max-width: 767px)").matches;
+    document.documentElement.classList.toggle("desktop", !isMobile);
+    document.documentElement.classList.toggle("mobile", !!isMobile);
+    document.documentElement.dataset.autocavaViewport = isMobile ? "mobile" : "desktop";
+  }
+
   function withBase(path) {
     if (!isGithubPages || !path || path.indexOf("/") !== 0 || path.indexOf(GITHUB_BASE + "/") === 0) return path;
     return GITHUB_BASE + path;
@@ -100,12 +107,17 @@
   }
 
   if (document.readyState === "loading") {
+    applyMobileMode();
     document.addEventListener("DOMContentLoaded", function () {
+      applyMobileMode();
       applyFixes(document);
     }, { once: true });
   } else {
+    applyMobileMode();
     applyFixes(document);
   }
+
+  window.addEventListener("resize", applyMobileMode, { passive: true });
 
   new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {

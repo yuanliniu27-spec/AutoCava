@@ -60,6 +60,80 @@
   }
 }
 
+@media (max-width: 767px) {
+  html.mobile,
+  html.mobile body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  html.mobile #__MStarApp,
+  html.mobile .mstar-layout,
+  html.mobile .layout-default {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  html.mobile .page-max,
+  html.mobile .page-max2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  html.mobile #page-header header,
+  html.mobile #page-header .h-16\.5,
+  html.mobile #page-header .h-14 {
+    height: 56px !important;
+  }
+
+  html.mobile #page-header .fixed > div {
+    height: 56px !important;
+  }
+
+  html.mobile #page-header .page-max2 {
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  html.mobile #page-header a.shrink-0.flex {
+    min-width: 0 !important;
+  }
+
+  html.mobile #page-header a.shrink-0.flex > img[alt="Logo"] {
+    width: 68px !important;
+    height: 40px !important;
+  }
+
+  html.mobile #page-header nav,
+  html.mobile #page-header [data-reka-navigation-menu] {
+    display: none !important;
+  }
+
+  html.mobile #page-header .pl-32 {
+    padding-left: 0 !important;
+    margin-left: auto !important;
+  }
+
+  html.mobile img,
+  html.mobile video,
+  html.mobile canvas {
+    max-width: 100%;
+  }
+
+  html.mobile [class*="w-[1200px]"],
+  html.mobile [class*="w-[1440px]"],
+  html.mobile [class*="w-[1800px]"],
+  html.mobile [class*="min-w-[1200px]"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
 #autocava-cavi-fallback-overlay {
   position: fixed;
   inset: 0;
