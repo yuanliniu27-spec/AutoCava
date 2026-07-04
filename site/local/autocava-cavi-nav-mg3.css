@@ -134,11 +134,41 @@
   }
 }
 
+.remove-fav-fly-source svg,
 .remove-fav-fly-source svg.iconify--m,
 .remove-fav-fly-source svg[class*="text-transparent"] {
-  color: transparent !important;
+  color: #222 !important;
   display: block !important;
   opacity: 1 !important;
+}
+
+.autocava-series-fav-source-fixed {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #222 !important;
+  line-height: 0 !important;
+}
+
+.autocava-series-hero-fav-button {
+  --autocava-fav-fill: #fff;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  border: 1px solid #d6d6d6 !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 6%) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  color: #222 !important;
+}
+
+.autocava-series-hero-fav-button svg {
+  width: 24px !important;
+  height: 22px !important;
 }
 
 .autocava-series-actionbar {

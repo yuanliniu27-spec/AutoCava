@@ -133,9 +133,17 @@
       if (!button) return;
       button.classList.add("autocava-series-fav-button");
       button.setAttribute("aria-label", button.getAttribute("aria-label") || "Agregar a favoritos");
+      source.classList.add("autocava-series-fav-source-fixed");
+      source.innerHTML = favoriteSvg();
       var svg = source.querySelector("svg");
       if (svg) svg.classList.add("autocava-series-fav-icon");
     });
+  }
+
+  function findSeriesHeroFavoriteButton() {
+    var source = document.querySelector(".remove-fav-fly-source");
+    if (!source) return null;
+    return source.closest("button,a") || source.parentElement || null;
   }
 
   function findSeriesActionBar() {
@@ -162,10 +170,14 @@
     if (!isSeriesPage()) return;
     normalizeSeriesFavoriteIcons();
     var actionBar = findSeriesActionBar();
+    var heroFavoriteButton = findSeriesHeroFavoriteButton();
     document.querySelectorAll("#__MStarApp > .autocava-series-fav-fallback").forEach(function (button) {
-      if (actionBar) actionBar.insertBefore(button, actionBar.firstElementChild);
+      if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches && actionBar) actionBar.insertBefore(button, actionBar.firstElementChild);
       else button.remove();
     });
+    if (heroFavoriteButton) {
+      heroFavoriteButton.classList.add("autocava-series-hero-fav-button");
+    }
     if (!actionBar) return;
     actionBar.classList.add("autocava-series-actionbar");
     if (!actionBar.querySelector(".autocava-series-fav-fallback")) {
