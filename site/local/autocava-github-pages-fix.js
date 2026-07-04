@@ -116,9 +116,54 @@
     }
   }
 
+  function bottomNavIcon(label) {
+    var icons = {
+      "Inicio": '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 10.8 12 4l8.5 6.8v8.7a1.5 1.5 0 0 1-1.5 1.5h-4.2v-5.7H9.2V21H5a1.5 1.5 0 0 1-1.5-1.5v-8.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      "Financiamiento": '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 9h10M7 13h5M15.5 13.5c1.25 0 2.25.75 2.25 1.7s-1 1.7-2.25 1.7-2.25-.75-2.25-1.7 1-1.7 2.25-1.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+      "Autos": '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.2 12.2 7 7.8A2 2 0 0 1 8.85 6.5h6.3A2 2 0 0 1 17 7.8l1.8 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 12h16v5.2H4V12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 17.2v1.3M17 17.2v1.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="7.5" cy="14.7" r="1" fill="currentColor"/><circle cx="16.5" cy="14.7" r="1" fill="currentColor"/></svg>',
+      "Mi cuenta": '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 20c.8-3.4 3.2-5.2 6.5-5.2s5.7 1.8 6.5 5.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    };
+    return icons[label] || "";
+  }
+
+  function findBottomNavRoot() {
+    var labels = ["Inicio", "Financiamiento", "Autos"];
+    var candidates = Array.prototype.slice.call(document.querySelectorAll("nav,footer,div"));
+    return candidates.find(function (node) {
+      var text = (node.textContent || "").replace(/\s+/g, " ");
+      if (!labels.every(function (label) { return text.indexOf(label) !== -1; })) return false;
+      if (text.indexOf("Mi cuenta") === -1 && text.indexOf("Mis favoritos") === -1) return false;
+      var rect = node.getBoundingClientRect();
+      var style = window.getComputedStyle ? window.getComputedStyle(node) : null;
+      var fixedNearBottom = style && (style.position === "fixed" || style.position === "sticky") && rect.bottom > window.innerHeight - 120;
+      return fixedNearBottom && rect.height > 40 && rect.height < 130;
+    });
+  }
+
+  function ensureBottomNavIcons() {
+    if (!window.matchMedia || !window.matchMedia("(max-width: 767px)").matches) return;
+    var nav = findBottomNavRoot();
+    if (!nav) return;
+    nav.classList.add("autocava-bottom-nav-fixed");
+    ["Inicio", "Financiamiento", "Autos", "Mi cuenta"].forEach(function (label) {
+      var textNode = Array.prototype.slice.call(nav.querySelectorAll("a,button,div,span")).find(function (node) {
+        return (node.textContent || "").replace(/\s+/g, " ").trim() === label;
+      });
+      if (!textNode) return;
+      var item = textNode.closest("a,button") || textNode.parentElement || textNode;
+      item.classList.add("autocava-bottom-nav-item");
+      if (item.querySelector(".autocava-bottom-nav-icon")) return;
+      var icon = document.createElement("span");
+      icon.className = "autocava-bottom-nav-icon";
+      icon.innerHTML = bottomNavIcon(label);
+      item.insertBefore(icon, item.firstChild);
+    });
+  }
+
   function applyFixes(root) {
     fixStaticUrls(root);
     ensureSeriesFavoriteButton();
+    ensureBottomNavIcons();
     loadMessages().then(function (messages) {
       replaceTextNodes(document.body, messages);
     });
