@@ -92,8 +92,33 @@
     });
   }
 
+  function favoriteSvg() {
+    return '<svg viewBox="0 0 20 18" aria-hidden="true" focusable="false">' +
+      '<path d="M10.9046 15.9356C10.1642 16.6046 9.0325 16.5983 8.29461 15.9266C3.65961 11.7236 0.599609 8.95161 0.599609 5.54961C0.599609 2.77761 2.77761 0.599609 5.54961 0.599609C7.11561 0.599609 8.61861 1.32861 9.59961 2.48061C10.5806 1.32861 12.0836 0.599609 13.6496 0.599609C16.4216 0.599609 18.5996 2.77761 18.5996 5.54961C18.5996 8.95161 15.5396 11.7236 10.9046 15.9356Z" fill="none" stroke="#222" stroke-width="1.2" stroke-linejoin="round"/>' +
+      '</svg>';
+  }
+
+  function ensureSeriesFavoriteButton() {
+    if (location.pathname.indexOf("/auto/series/") === -1 && location.pathname.indexOf(GITHUB_BASE + "/auto/series/") === -1) return;
+    var bars = Array.prototype.slice.call(document.querySelectorAll("div"));
+    var actionBar = bars.find(function (bar) {
+      return bar.textContent && bar.textContent.indexOf("Prueba de manejo") !== -1 && bar.querySelector('a[href*="/visit"]');
+    });
+    if (!actionBar) return;
+    actionBar.classList.add("autocava-series-actionbar");
+    if (!actionBar.querySelector(".autocava-series-fav-fallback")) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "autocava-series-fav-fallback";
+      button.setAttribute("aria-label", "Mis favoritos");
+      button.innerHTML = favoriteSvg();
+      actionBar.insertBefore(button, actionBar.firstElementChild);
+    }
+  }
+
   function applyFixes(root) {
     fixStaticUrls(root);
+    ensureSeriesFavoriteButton();
     loadMessages().then(function (messages) {
       replaceTextNodes(document.body, messages);
     });

@@ -134,6 +134,45 @@
   }
 }
 
+.remove-fav-fly-source svg.iconify--m,
+.remove-fav-fly-source svg[class*="text-transparent"] {
+  color: transparent !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.autocava-series-actionbar {
+  gap: 8px;
+}
+
+.autocava-series-fav-fallback {
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: 1px solid #d6d6d6;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  cursor: pointer;
+}
+
+.autocava-series-fav-fallback svg {
+  width: 24px;
+  height: 22px;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .autocava-series-fav-fallback {
+    display: none;
+  }
+}
+
 #autocava-cavi-fallback-overlay {
   position: fixed;
   inset: 0;
