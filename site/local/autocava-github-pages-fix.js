@@ -162,8 +162,29 @@
         node = node.parentElement;
       }
     });
+    if (!candidates.length) {
+      Array.prototype.slice.call(document.querySelectorAll("div")).forEach(function (node) {
+        var text = (node.textContent || "").replace(/\s+/g, " ");
+        if (text.indexOf("Prueba de manejo") === -1 || text.indexOf("Aplicar préstamo") === -1) return;
+        var rect = node.getBoundingClientRect();
+        var nearBottom = rect.bottom > window.innerHeight - 180 || rect.top > window.innerHeight - 180;
+        if (nearBottom && rect.height > 36 && rect.height < 180 && rect.width > 220) {
+          candidates.push({ node: node, area: rect.width * rect.height });
+        }
+      });
+    }
     candidates.sort(function (a, b) { return a.area - b.area; });
     return candidates.length ? candidates[0].node : null;
+  }
+
+  function findSeriesActionBarFavoriteSlot(actionBar) {
+    if (!actionBar) return null;
+    var first = actionBar.firstElementChild;
+    if (!first || first.classList.contains("autocava-series-fav-fallback")) return null;
+    var text = (first.textContent || "").replace(/\s+/g, " ").trim();
+    var rect = first.getBoundingClientRect();
+    if (text === "" && rect.width >= 36 && rect.width <= 90 && rect.height >= 36 && rect.height <= 90) return first;
+    return null;
   }
 
   function ensureSeriesFavoriteButton() {
@@ -172,8 +193,13 @@
     var actionBar = findSeriesActionBar();
     var heroFavoriteButton = findSeriesHeroFavoriteButton();
     document.querySelectorAll("#__MStarApp > .autocava-series-fav-fallback").forEach(function (button) {
-      if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches && actionBar) actionBar.insertBefore(button, actionBar.firstElementChild);
-      else button.remove();
+      if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches && actionBar) {
+        var slot = findSeriesActionBarFavoriteSlot(actionBar);
+        if (slot) actionBar.replaceChild(button, slot);
+        else actionBar.insertBefore(button, actionBar.firstElementChild);
+      } else {
+        button.remove();
+      }
     });
     if (heroFavoriteButton) {
       heroFavoriteButton.classList.add("autocava-series-hero-fav-button");
@@ -181,8 +207,8 @@
     if (!actionBar) return;
     actionBar.classList.add("autocava-series-actionbar");
     if (!actionBar.querySelector(".autocava-series-fav-fallback")) {
-      var first = actionBar.firstElementChild;
-      var button = first && !(first.matches && first.matches('a[href*="/visit"]')) && (first.textContent || "").trim() === "" ? first : document.createElement("button");
+      var slot = findSeriesActionBarFavoriteSlot(actionBar);
+      var button = slot || document.createElement("button");
       if (button.tagName === "BUTTON") button.type = "button";
       button.className = "autocava-series-fav-fallback autocava-series-fav-button";
       button.setAttribute("aria-label", "Agregar a favoritos");
