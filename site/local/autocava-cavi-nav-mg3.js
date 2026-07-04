@@ -8,7 +8,7 @@
     return base + cleanPath;
   }
 
-  var ICON_SRC = sitePath("site/local/cavi-nav.png");
+  var ICON_SRC = sitePath("site/local/cavi-nav.svg");
   var DESKTOP_ID = "autocava-cavi-nav-desktop";
   var MOBILE_ID = "autocava-cavi-nav-mobile";
   var MG3_SERIES_URL = "/auto/series/336";
@@ -177,12 +177,10 @@
     img.height = 35;
     button.appendChild(img);
 
-    if (id === MOBILE_ID) {
-      var text = document.createElement("span");
-      text.className = "autocava-cavi-label";
-      text.textContent = "Cavi";
-      button.appendChild(text);
-    }
+    var text = document.createElement("span");
+    text.className = "autocava-cavi-label";
+    text.textContent = "Cavi";
+    button.appendChild(text);
 
     return button;
   }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 36" role="img" aria-label="Cavi">
+  <defs>
+    <linearGradient id="ca-gradient" x1="12" y1="18" x2="50" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b00ff"/>
+      <stop offset="0.56" stop-color="#ff00cf"/>
+      <stop offset="1" stop-color="#ff5a00"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-12%" y="-24%" width="124%" height="148%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#8c7212" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect x="3" y="4" width="54" height="28" rx="7" fill="#fff2c2" filter="url(#soft-shadow)"/>
+  <path d="M14 12h18v5h-12v7h12v5H14z" fill="url(#ca-gradient)"/>
+  <path d="M36 29h-6l10-17h7l10 17h-7l-1.4-2.7H37.4zm4-7.5h6.1L43 15.8z" fill="url(#ca-gradient)"/>
+  <rect x="48.5" y="7" width="16" height="16" rx="3.5" fill="#ec3fd4"/>
+  <text x="56.5" y="18.2" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="800" fill="#fff">Ai</text>
+</svg>

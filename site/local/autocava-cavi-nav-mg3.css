@@ -12,9 +12,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   height: 48px;
   padding: 0 4px;
-  line-height: 0;
+  line-height: 1;
 }
 
 .autocava-cavi-button:focus-visible {
@@ -29,8 +30,8 @@
 
 .autocava-cavi-icon {
   display: block;
-  width: 78px;
-  height: 35px;
+  width: 39px;
+  height: 24px;
   object-fit: contain;
   transition: transform .18s ease;
 }
@@ -44,7 +45,12 @@
 }
 
 .autocava-cavi-label {
-  display: none;
+  display: inline-block;
+  color: #222;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 @media (min-width: 1024px) {
@@ -59,8 +65,8 @@
   }
 
   #autocava-cavi-nav-mobile .autocava-cavi-icon {
-    width: 72px;
-    height: 32px;
+    width: 39px;
+    height: 24px;
   }
 }
 
@@ -134,7 +140,7 @@
   }
 
   html.mobile #autocava-cavi-nav-mobile {
-    width: 76px !important;
+    width: 82px !important;
     height: 40px !important;
     margin-left: 6px !important;
     gap: 4px;
@@ -142,8 +148,8 @@
   }
 
   html.mobile #autocava-cavi-nav-mobile .autocava-cavi-icon {
-    width: 32px !important;
-    height: 22px !important;
+    width: 37px !important;
+    height: 23px !important;
   }
 
   html.mobile #autocava-cavi-nav-mobile .autocava-cavi-label {
