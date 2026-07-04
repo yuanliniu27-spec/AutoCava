@@ -226,20 +226,25 @@
   color: #222;
 }
 
+.autocava-bottom-nav-fixed .autocava-bottom-nav-native-icon {
+  display: none !important;
+}
+
 .autocava-bottom-nav-icon {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: currentColor;
+  color: #222;
   line-height: 0;
   pointer-events: none;
+  margin-bottom: 1px;
 }
 
 .autocava-bottom-nav-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: block;
 }
 

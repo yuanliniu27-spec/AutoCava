@@ -158,9 +158,23 @@
       if (text.indexOf("Mi cuenta") === -1 && text.indexOf("Mis favoritos") === -1) return false;
       var rect = node.getBoundingClientRect();
       var style = window.getComputedStyle ? window.getComputedStyle(node) : null;
-      var fixedNearBottom = style && (style.position === "fixed" || style.position === "sticky") && rect.bottom > window.innerHeight - 120;
-      return fixedNearBottom && rect.height > 40 && rect.height < 130;
+      var nearBottom = rect.bottom > window.innerHeight - 140 && rect.top > window.innerHeight - 180;
+      var fixedLike = style && (style.position === "fixed" || style.position === "sticky" || style.position === "absolute");
+      return nearBottom && fixedLike && rect.height > 40 && rect.height < 150;
     });
+  }
+
+  function findBottomNavItem(nav, label) {
+    var nodes = Array.prototype.slice.call(nav.querySelectorAll("a,button,div,span"));
+    var exact = nodes.find(function (node) {
+      return (node.textContent || "").replace(/\s+/g, " ").trim() === label;
+    });
+    var textNode = exact || nodes.find(function (node) {
+      var text = (node.textContent || "").replace(/\s+/g, " ").trim();
+      return text.indexOf(label) !== -1 && text.length <= label.length + 8;
+    });
+    if (!textNode) return null;
+    return textNode.closest("a,button") || textNode.parentElement || textNode;
   }
 
   function ensureBottomNavIcons() {
@@ -169,13 +183,17 @@
     if (!nav) return;
     nav.classList.add("autocava-bottom-nav-fixed");
     ["Inicio", "Financiamiento", "Autos", "Mi cuenta"].forEach(function (label) {
-      var textNode = Array.prototype.slice.call(nav.querySelectorAll("a,button,div,span")).find(function (node) {
-        return (node.textContent || "").replace(/\s+/g, " ").trim() === label;
-      });
-      if (!textNode) return;
-      var item = textNode.closest("a,button") || textNode.parentElement || textNode;
+      var item = findBottomNavItem(nav, label);
+      if (!item) return;
       item.classList.add("autocava-bottom-nav-item");
-      if (item.querySelector(".autocava-bottom-nav-icon")) return;
+      item.dataset.autocavaBottomLabel = label;
+      item.querySelectorAll("svg:not(.autocava-bottom-nav-svg),img:not(.autocava-bottom-nav-img)").forEach(function (oldIcon) {
+        oldIcon.classList.add("autocava-bottom-nav-native-icon");
+      });
+      if (item.querySelector(".autocava-bottom-nav-icon")) {
+        item.querySelector(".autocava-bottom-nav-icon").innerHTML = bottomNavIcon(label);
+        return;
+      }
       var icon = document.createElement("span");
       icon.className = "autocava-bottom-nav-icon";
       icon.innerHTML = bottomNavIcon(label);
