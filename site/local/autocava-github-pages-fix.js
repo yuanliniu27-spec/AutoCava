@@ -46,6 +46,21 @@
     });
   }
 
+  function hydrateLazyImages(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll("img[data-src]").forEach(function (img) {
+      var dataSrc = img.getAttribute("data-src");
+      var currentSrc = img.getAttribute("src") || "";
+      if (!dataSrc || currentSrc.indexOf("placeholder") === -1) return;
+      img.setAttribute("src", dataSrc);
+      if (!img.getAttribute("srcset")) {
+        img.setAttribute("srcset", dataSrc + ":750x0 750w, " + dataSrc + ":1000x0 1000w");
+      }
+      img.setAttribute("loading", "eager");
+      img.removeAttribute("data-error");
+    });
+  }
+
   function flattenMessages(input, prefix, output) {
     Object.keys(input || {}).forEach(function (key) {
       var value = input[key];
@@ -203,6 +218,7 @@
 
   function applyFixes(root) {
     fixStaticUrls(root);
+    hydrateLazyImages(root);
     ensureSeriesFavoriteButton();
     bindSeriesFavoriteState();
     ensureBottomNavIcons();
