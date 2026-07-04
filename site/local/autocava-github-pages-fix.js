@@ -189,7 +189,24 @@
       return text.indexOf(label) !== -1 && text.length <= label.length + 8;
     });
     if (!textNode) return null;
-    return textNode.closest("a,button") || textNode.parentElement || textNode;
+    return {
+      item: textNode.closest("a,button") || textNode.parentElement || textNode,
+      textNode: textNode
+    };
+  }
+
+  function findBottomNavIconHost(item, textNode, label) {
+    var node = textNode;
+    while (node && node !== item) {
+      if (node.nodeType === 1) {
+        var text = (node.textContent || "").replace(/\s+/g, " ").trim();
+        if (text === label || (text.indexOf(label) !== -1 && text.length <= label.length + 8)) {
+          return node;
+        }
+      }
+      node = node.parentElement;
+    }
+    return item;
   }
 
   function ensureBottomNavIcons() {
@@ -198,21 +215,25 @@
     if (!nav) return;
     nav.classList.add("autocava-bottom-nav-fixed");
     ["Inicio", "Financiamiento", "Autos", "Mi cuenta"].forEach(function (label) {
-      var item = findBottomNavItem(nav, label);
-      if (!item) return;
+      var found = findBottomNavItem(nav, label);
+      if (!found || !found.item) return;
+      var item = found.item;
+      var iconHost = findBottomNavIconHost(item, found.textNode, label);
       item.classList.add("autocava-bottom-nav-item");
       item.dataset.autocavaBottomLabel = label;
+      iconHost.classList.add("autocava-bottom-nav-pill");
       item.querySelectorAll("svg:not(.autocava-bottom-nav-svg),img:not(.autocava-bottom-nav-img)").forEach(function (oldIcon) {
         oldIcon.classList.add("autocava-bottom-nav-native-icon");
       });
-      if (item.querySelector(".autocava-bottom-nav-icon")) {
-        item.querySelector(".autocava-bottom-nav-icon").innerHTML = bottomNavIcon(label);
-        return;
+      var icon = item.querySelector(".autocava-bottom-nav-icon");
+      if (!icon) {
+        icon = document.createElement("span");
+        icon.className = "autocava-bottom-nav-icon";
       }
-      var icon = document.createElement("span");
-      icon.className = "autocava-bottom-nav-icon";
       icon.innerHTML = bottomNavIcon(label);
-      item.insertBefore(icon, item.firstChild);
+      if (icon.parentElement !== iconHost) {
+        iconHost.insertBefore(icon, iconHost.firstChild);
+      }
     });
   }
 
