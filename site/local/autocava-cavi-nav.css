@@ -12,9 +12,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   height: 48px;
   padding: 0 4px;
-  line-height: 0;
+  line-height: 1;
 }
 
 .autocava-cavi-button:focus-visible {
@@ -29,8 +30,8 @@
 
 .autocava-cavi-icon {
   display: block;
-  width: 78px;
-  height: 35px;
+  width: 42px;
+  height: 27px;
   object-fit: contain;
   transition: transform .18s ease;
 }
@@ -41,6 +42,15 @@
   height: 40px;
   margin-left: 8px;
   padding: 0;
+}
+
+.autocava-cavi-label {
+  display: inline-block;
+  color: #222;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 @media (min-width: 1024px) {
@@ -55,8 +65,8 @@
   }
 
   #autocava-cavi-nav-mobile .autocava-cavi-icon {
-    width: 72px;
-    height: 32px;
+    width: 40px;
+    height: 25px;
   }
 }
 

@@ -30,8 +30,8 @@
 
 .autocava-cavi-icon {
   display: block;
-  width: 39px;
-  height: 24px;
+  width: 42px;
+  height: 27px;
   object-fit: contain;
   transition: transform .18s ease;
 }
@@ -65,8 +65,8 @@
   }
 
   #autocava-cavi-nav-mobile .autocava-cavi-icon {
-    width: 39px;
-    height: 24px;
+    width: 42px;
+    height: 27px;
   }
 }
 
@@ -140,7 +140,7 @@
   }
 
   html.mobile #autocava-cavi-nav-mobile {
-    width: 82px !important;
+    width: 86px !important;
     height: 40px !important;
     margin-left: 6px !important;
     gap: 4px;
@@ -148,8 +148,8 @@
   }
 
   html.mobile #autocava-cavi-nav-mobile .autocava-cavi-icon {
-    width: 37px !important;
-    height: 23px !important;
+    width: 40px !important;
+    height: 25px !important;
   }
 
   html.mobile #autocava-cavi-nav-mobile .autocava-cavi-label {
@@ -409,7 +409,7 @@
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 3px !important;
+  gap: 0 !important;
   color: #222;
 }
 
@@ -420,7 +420,7 @@
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 2px !important;
+  gap: 0 !important;
   color: #222;
 }
 
@@ -433,6 +433,10 @@
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   line-height: 1.1 !important;
+}
+
+.autocava-bottom-nav-fixed .autocava-bottom-nav-pill {
+  line-height: 1 !important;
 }
 
 .autocava-bottom-nav-fixed .router-link-active.autocava-bottom-nav-item,
@@ -465,7 +469,8 @@
   color: #222;
   line-height: 0;
   pointer-events: none;
-  margin-bottom: 0;
+  margin-bottom: -5px !important;
+  transform: translateY(4px);
 }
 
 .autocava-bottom-nav-icon svg {

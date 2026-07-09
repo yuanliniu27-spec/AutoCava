@@ -173,8 +173,8 @@
     img.className = "autocava-cavi-icon";
     img.src = ICON_SRC;
     img.alt = "Cavi";
-    img.width = 78;
-    img.height = 35;
+    img.width = 54;
+    img.height = 34;
     button.appendChild(img);
 
     var text = document.createElement("span");
