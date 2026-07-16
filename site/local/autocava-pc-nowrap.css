@@ -23,7 +23,7 @@
 
   h1,
   h2,
-  h3 {
+  h3:not(a h3) {
     white-space: nowrap !important;
     word-break: keep-all !important;
     overflow-wrap: normal !important;

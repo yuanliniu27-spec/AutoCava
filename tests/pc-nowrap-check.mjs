@@ -4,6 +4,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 
 const baseUrl = process.env.BASE_URL || "https://yuanliniu27-spec.github.io/AutoCava/";
+const cacheBust = process.env.CACHE_BUST || "";
 const widths = [1024, 1280, 1440, 1920];
 const paths = [
   "",
@@ -13,7 +14,9 @@ const paths = [
 ];
 
 function pageUrl(path) {
-  return new URL(path, baseUrl).href;
+  const url = new URL(path, baseUrl);
+  if (cacheBust) url.searchParams.set("v", cacheBust);
+  return url.href;
 }
 
 const browser = await chromium.launch({
@@ -64,7 +67,7 @@ try {
         };
 
         const candidates = [
-          ...document.querySelectorAll("h1, h2, h3"),
+          ...document.querySelectorAll("h1, h2, h3:not(a h3)"),
           ...document.querySelectorAll("#page-header nav a, #page-header nav button"),
         ];
 

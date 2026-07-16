@@ -24,14 +24,17 @@ assert.ok(fs.existsSync(cssPath), "Missing PC nowrap stylesheet");
 const css = fs.readFileSync(cssPath, "utf8");
 assert.match(css, /@media\s*\(min-width:\s*1024px\)/);
 assert.match(css, /#page-header[\s\S]*white-space:\s*nowrap/);
-assert.match(css, /h1[\s\S]*h2[\s\S]*h3[\s\S]*white-space:\s*nowrap/);
+assert.match(css, /h1[\s\S]*h2[\s\S]*h3:not\(a h3\)[\s\S]*white-space:\s*nowrap/);
 
 for (const relativePath of pageFiles) {
   const html = fs.readFileSync(path.join(root, relativePath), "utf8");
-  const depth = relativePath === "index.html" ? "" : "../../../";
+  const href =
+    relativePath === "auto/series/586/index.html"
+      ? "../../../site/local/autocava-pc-nowrap.css"
+      : "site/local/autocava-pc-nowrap.css";
   assert.ok(
     html.includes(
-      `<link rel="stylesheet" href="${depth}site/local/autocava-pc-nowrap.css">`,
+      `<link rel="stylesheet" href="${href}">`,
     ),
     `${relativePath} does not include the PC nowrap stylesheet`,
   );
