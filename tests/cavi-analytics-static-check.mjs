@@ -21,8 +21,11 @@ assert.match(html, /denominatorElement = denominatorOverrides\[item\.element\] \
 assert.match(html, /caviaix_session_layer_close.*caviaix_session_layer/s)
 assert.match(html, /caviaix_dislike_layer_option_btn.*caviaix_likeorno_layer_option_btn/s)
 assert.match(html, /特殊点击率口径/)
+assert.match(html, /http-equiv="Content-Security-Policy"/)
+assert.match(html, /connect-src 'none'/)
 assert.match(html, /@media\s*\(max-width:\s*700px\)/)
 assert.doesNotMatch(html, /<script[^>]+src=/)
 assert.doesNotMatch(html, /<link[^>]+stylesheet/)
+assert.doesNotMatch(html, /analytics\.google\.com|kcn4tlh8cxcn|fetch\(|XMLHttpRequest|type="file"|<form|刷新数据|更新数据/)
 
 console.log('cavi analytics static checks passed')
