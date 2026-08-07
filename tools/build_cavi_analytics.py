@@ -94,6 +94,41 @@ def aggregate_daily(rows: list[dict], names: dict[str, str]) -> dict[str, dict]:
     return output
 
 
+def aggregate_range(daily: dict[str, dict], start: str, end: str) -> dict:
+    """Combine daily results for an inclusive YYYYMMDD range."""
+    source_totals = Counter()
+    element_totals = {}
+    selected_dates = [date for date in sorted(daily) if start <= date <= end]
+    for date in selected_dates:
+        day = daily[date]
+        for source in day["sources"]:
+            source_totals[source["name"]] += source["click_uv"]
+        for item in day["elements"]:
+            current = element_totals.setdefault(
+                item["element"], {"name": item["name"], "click_uv": 0, "view_uv": 0}
+            )
+            current["click_uv"] += item["click_uv"]
+            current["view_uv"] += item["view_uv"]
+
+    sources = [{"name": name, "click_uv": uv} for name, uv in source_totals.items()]
+    sources.sort(key=lambda item: (-item["click_uv"], item["name"]))
+    elements = []
+    for element, item in element_totals.items():
+        item = dict(item)
+        item["element"] = element
+        item["ctr"] = item["click_uv"] / item["view_uv"] if item["view_uv"] else None
+        elements.append(item)
+    elements.sort(
+        key=lambda item: (
+            item["ctr"] is None,
+            -(item["ctr"] or 0),
+            -item["click_uv"],
+            item["name"],
+        )
+    )
+    return {"dates": selected_dates, "sources": sources, "elements": elements}
+
+
 def fetch_feishu_rows(url: str, sheet_id: str = "zXsFTi") -> list[list[str]]:
     rows = []
     for start, end in ((1, 200), (201, 400), (401, 455)):
@@ -199,14 +234,16 @@ def render_html(payload: dict) -> str:
     .hero {{ display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 28px; }}
     h1 {{ margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spacing: -.045em; }}
     .subtitle {{ margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }}
-    .date-control {{ min-width: 208px; }}
+    .date-control {{ min-width: 340px; }}
     .date-control label {{ display: block; margin-bottom: 8px; color: var(--muted); font-size: 12px; font-weight: 700; }}
-    select, .search-input {{
+    input[type="date"], .search-input {{
       width: 100%; border: 1px solid #d9deea; border-radius: 13px; background: rgba(255,255,255,.9);
       color: var(--ink); outline: none; transition: border-color .2s, box-shadow .2s;
     }}
-    select {{ padding: 12px 40px 12px 14px; cursor: pointer; }}
-    select:focus, .search-input:focus {{ border-color: var(--purple); box-shadow: 0 0 0 4px rgba(117,87,232,.12); }}
+    input[type="date"] {{ padding: 12px 14px; }}
+    input[type="date"]:focus, .search-input:focus {{ border-color: var(--purple); box-shadow: 0 0 0 4px rgba(117,87,232,.12); }}
+    .range-inputs {{ display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 9px; }}
+    .range-separator {{ color: var(--muted); font-size: 12px; font-weight: 700; }}
     .notice {{ display: flex; gap: 9px; align-items: center; margin-bottom: 18px; color: #5b5670; font-size: 12px; }}
     .notice-dot {{ width: 8px; height: 8px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 0 5px rgba(117,87,232,.1); }}
     .card {{ margin-top: 22px; padding: 26px; border: 1px solid rgba(222,225,235,.9); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(14px); }}
@@ -243,6 +280,8 @@ def render_html(payload: dict) -> str:
       .shell {{ width: min(100% - 24px, 1120px); padding: 34px 0 48px; }}
       .hero, .card-head {{ display: block; }}
       .date-control, .search-wrap {{ width: 100%; margin-top: 18px; }}
+      .range-inputs {{ grid-template-columns: 1fr; gap: 7px; }}
+      .range-separator {{ display: none; }}
       .card {{ padding: 18px; border-radius: 18px; }}
       .metrics {{ margin-top: 18px; gap: 18px; }}
       .source-row {{ grid-template-columns: 92px 1fr 58px; gap: 9px; }}
@@ -255,19 +294,23 @@ def render_html(payload: dict) -> str:
     <header class="hero">
       <div>
         <p class="eyebrow">CAVI ANALYTICS · DAILY</p>
-        <h1>交互数据日报</h1>
-        <p class="subtitle">查看用户来源点击表现与埋点点击率分布，数据按选择日期独立汇总。</p>
+        <h1>AI 所有埋点事件统计</h1>
+        <p class="subtitle">查看 AI 埋点的用户来源点击表现与点击率分布，数据按选择日期区间累计。</p>
       </div>
       <div class="date-control">
-        <label for="reportDate">统计日期</label>
-        <select id="reportDate" aria-label="选择统计日期"></select>
+        <label>统计区间</label>
+        <div class="range-inputs">
+          <input id="rangeStart" type="date" aria-label="开始日期">
+          <span class="range-separator">至</span>
+          <input id="rangeEnd" type="date" aria-label="结束日期">
+        </div>
       </div>
     </header>
     <div class="notice"><span class="notice-dot"></span><span>统计口径：Total users 按日累计；不进行跨日用户去重。</span></div>
 
     <section class="card" aria-labelledby="sourceTitle">
       <div class="card-head">
-        <div><h2 id="sourceTitle">用户来源 · 点击 UV</h2><p class="card-description">按 Content Group 汇总当日 click 事件，由高到低排列。</p></div>
+        <div><h2 id="sourceTitle">用户来源 · 点击 UV</h2><p class="card-description">按 Content Group 汇总所选区间 click 事件，由高到低排列。</p></div>
         <div class="metrics"><div class="metric"><strong id="sourceTotal">0</strong><span>点击 UV 累计</span></div><div class="metric"><strong id="sourceCount">0</strong><span>来源数量</span></div></div>
       </div>
       <div id="sourceRanking" class="ranking"></div>
@@ -291,7 +334,8 @@ def render_html(payload: dict) -> str:
   <script id="dashboardData" type="application/json">{data_json}</script>
   <script>
     const payload = JSON.parse(document.getElementById('dashboardData').textContent)
-    const reportDate = document.getElementById('reportDate')
+    const rangeStart = document.getElementById('rangeStart')
+    const rangeEnd = document.getElementById('rangeEnd')
     const sourceRanking = document.getElementById('sourceRanking')
     const sourceTotal = document.getElementById('sourceTotal')
     const sourceCount = document.getElementById('sourceCount')
@@ -300,8 +344,39 @@ def render_html(payload: dict) -> str:
     const resultNote = document.getElementById('resultNote')
     const number = new Intl.NumberFormat('zh-CN')
 
-    function labelDate(raw) {{
+    function inputDate(raw) {{
       return `${{raw.slice(0,4)}}-${{raw.slice(4,6)}}-${{raw.slice(6,8)}}`
+    }}
+
+    function keyDate(raw) {{ return raw.replaceAll('-', '') }}
+
+    function selectedKeys() {{
+      let start = keyDate(rangeStart.value) || payload.dates[0]
+      let end = keyDate(rangeEnd.value) || payload.dates[payload.dates.length - 1]
+      if (start > end) {{
+        if (document.activeElement === rangeStart) {{ end = start; rangeEnd.value = inputDate(end) }}
+        else {{ start = end; rangeStart.value = inputDate(start) }}
+      }}
+      return payload.dates.filter(date => date >= start && date <= end)
+    }}
+
+    function aggregateSelectedRange() {{
+      const keys = selectedKeys()
+      const sourceTotals = new Map()
+      const elementTotals = new Map()
+      keys.forEach(key => {{
+        const day = payload.daily[key]
+        ;(day.sources || []).forEach(item => sourceTotals.set(item.name, (sourceTotals.get(item.name) || 0) + item.click_uv))
+        ;(day.elements || []).forEach(item => {{
+          const current = elementTotals.get(item.element) || {{ element: item.element, name: item.name, click_uv: 0, view_uv: 0 }}
+          current.click_uv += item.click_uv
+          current.view_uv += item.view_uv
+          elementTotals.set(item.element, current)
+        }})
+      }})
+      const sources = [...sourceTotals].map(([name, click_uv]) => ({{name, click_uv}})).sort((a,b) => b.click_uv - a.click_uv || a.name.localeCompare(b.name))
+      const elements = [...elementTotals.values()].map(item => ({{...item, ctr: item.view_uv ? item.click_uv / item.view_uv : null}})).sort((a,b) => (a.ctr === null) - (b.ctr === null) || (b.ctr || 0) - (a.ctr || 0) || b.click_uv - a.click_uv || a.name.localeCompare(b.name))
+      return {{keys, sources, elements}}
     }}
 
     function escapeHtml(value) {{
@@ -342,20 +417,15 @@ def render_html(payload: dict) -> str:
     }}
 
     function render() {{
-      const day = payload.daily[reportDate.value] || {{sources: [], elements: []}}
-      renderSources(day)
-      renderElements(day)
+      const summary = aggregateSelectedRange()
+      renderSources(summary)
+      renderElements(summary)
     }}
 
-    payload.dates.slice().reverse().forEach(date => {{
-      const option = document.createElement('option')
-      option.value = date
-      option.textContent = labelDate(date)
-      reportDate.appendChild(option)
-    }})
-    reportDate.value = payload.dates[payload.dates.length - 1]
-    reportDate.addEventListener('change', render)
-    elementSearch.addEventListener('input', () => renderElements(payload.daily[reportDate.value] || {{elements: []}}))
+    rangeStart.min = inputDate(payload.dates[0]); rangeStart.max = inputDate(payload.dates[payload.dates.length - 1]); rangeStart.value = inputDate(payload.dates[0])
+    rangeEnd.min = inputDate(payload.dates[0]); rangeEnd.max = inputDate(payload.dates[payload.dates.length - 1]); rangeEnd.value = inputDate(payload.dates[payload.dates.length - 1])
+    rangeStart.addEventListener('change', render); rangeEnd.addEventListener('change', render)
+    elementSearch.addEventListener('input', () => renderElements(aggregateSelectedRange()))
     render()
   </script>
 </body>
@@ -373,7 +443,7 @@ def build_payload(csv_path: Path, feishu_url: str) -> dict:
     mapped = sum(element in mapping for element in elements)
     return {
         "meta": {
-            "title": "Cavi 交互数据日报",
+            "title": "AI 所有埋点事件统计",
             "source_file": csv_path.name,
             "date_min": min(daily),
             "date_max": max(daily),

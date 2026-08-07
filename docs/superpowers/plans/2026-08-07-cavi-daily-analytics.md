@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a standalone `cavi-analytics.html` that shows daily Content Group click UV rankings and daily element click-through-rate rankings with fuzzy search.
+**Goal:** Build a standalone `cavi-analytics.html` that shows Content Group click UV rankings and element click-through-rate rankings for a selected date range with fuzzy search.
 
-**Architecture:** A Python build script reads the supplied CSV and fetches the Feishu mapping only at build time, aggregates compact per-day JSON, then writes one dependency-free HTML file. Browser JavaScript only switches dates, filters rows, sorts deterministic results, and renders the selected B-style vertical report.
+**Architecture:** A Python build script reads the supplied CSV and fetches the Feishu mapping only at build time, aggregates compact per-day JSON, then writes one dependency-free HTML file. Browser JavaScript combines the selected inclusive date range, filters rows, sorts deterministic results, and renders the selected B-style vertical report.
 
 **Tech Stack:** Python 3 standard library, HTML/CSS/vanilla JavaScript, Node.js static checks, Python `unittest`.
 
@@ -216,7 +216,7 @@ Add `render_html(payload)` and a CLI `main()` accepting:
 --output cavi-analytics.html
 ```
 
-The page must use the approved B layout: header and date control, stacked source ranking, stacked CTR table, Chinese name plus English name, actual CTR-width background capped at 100%, `—` for missing exposure, fuzzy search over both names, responsive narrow-screen layout, and accessible labels/focus styles.
+The page must use the approved B layout: header and start/end date controls defaulting to the full source range, stacked source ranking, stacked CTR table, Chinese name plus English name, actual CTR-width background capped at 100%, `—` for missing exposure, fuzzy search over both names, responsive narrow-screen layout, and accessible labels/focus styles.
 
 - [ ] **Step 4: Generate the page**
 
