@@ -294,6 +294,8 @@ def render_html(payload: dict) -> str:
     .missing {{ color: #9299a8; background: repeating-linear-gradient(135deg,#f6f7f9,#f6f7f9 6px,#eceef2 6px,#eceef2 12px); }}
     .empty {{ padding: 34px 18px; color: var(--muted); text-align: center; font-size: 13px; }}
     .footnote {{ margin: 18px 2px 0; color: #89909e; font-size: 11px; line-height: 1.7; }}
+    .formula-note {{ margin: -8px 0 18px; color: #6f7686; font-size: 11px; line-height: 1.7; }}
+    .formula-note strong {{ color: #4f5667; }}
     @media (max-width: 700px) {{
       .shell {{ width: min(100% - 24px, 1120px); padding: 34px 0 48px; }}
       .hero, .card-head {{ display: block; }}
@@ -339,6 +341,10 @@ def render_html(payload: dict) -> str:
         <div><h2 id="ctrTitle">埋点点击率 · 由高到低</h2><p class="card-description">点击率 = click 的 Total users ÷ view_item 的 Total users。</p></div>
         <div class="search-wrap"><label for="elementSearch" style="position:absolute;left:-9999px">模糊搜索埋点名称</label><input id="elementSearch" class="search-input" type="search" placeholder="搜索中文或英文埋点名称…" autocomplete="off"></div>
       </div>
+      <p class="formula-note"><strong>特殊点击率口径：</strong>
+        caviaix_session_layer_close、caviaix_session_layer_input_box 使用 caviaix_session_layer 曝光 UV；
+        caviaix_dislike_layer_option_btn、caviaix_like_layer_option_btn 使用 caviaix_likeorno_layer_option_btn 曝光 UV。
+      </p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>埋点名称</th><th>点击率</th><th>点击 UV</th></tr></thead>
@@ -360,6 +366,7 @@ def render_html(payload: dict) -> str:
     const elementSearch = document.getElementById('elementSearch')
     const ctrTableBody = document.getElementById('ctrTableBody')
     const resultNote = document.getElementById('resultNote')
+    const denominatorOverrides = payload.ctr_denominator_overrides || {{}}
     const number = new Intl.NumberFormat('zh-CN')
 
     function inputDate(raw) {{
@@ -393,7 +400,20 @@ def render_html(payload: dict) -> str:
         }})
       }})
       const sources = [...sourceTotals].map(([name, click_uv]) => ({{name, click_uv}})).sort((a,b) => b.click_uv - a.click_uv || a.name.localeCompare(b.name))
-      const elements = [...elementTotals.values()].filter(item => item.click_uv > 0).map(item => ({{...item, ctr: item.view_uv ? item.click_uv / item.view_uv : null}})).sort((a,b) => (a.ctr === null) - (b.ctr === null) || (b.ctr || 0) - (a.ctr || 0) || b.click_uv - a.click_uv || a.name.localeCompare(b.name))
+      const elements = [...elementTotals.values()]
+        .filter(item => item.click_uv > 0)
+        .map(item => {{
+          const denominatorElement = denominatorOverrides[item.element] || item.element
+          const denominator = elementTotals.get(denominatorElement)
+          const view_uv = denominator ? denominator.view_uv : 0
+          return {{
+            ...item,
+            view_uv,
+            denominator_element: denominatorElement,
+            ctr: view_uv ? item.click_uv / view_uv : null
+          }}
+        }})
+        .sort((a,b) => (a.ctr === null) - (b.ctr === null) || (b.ctr || 0) - (a.ctr || 0) || b.click_uv - a.click_uv || a.name.localeCompare(b.name))
       return {{keys, sources, elements}}
     }}
 
@@ -423,10 +443,13 @@ def render_html(payload: dict) -> str:
         const valid = Number.isFinite(item.ctr)
         const rateText = valid ? `${{(item.ctr * 100).toFixed(1)}}%` : '—'
         const width = valid ? Math.min(Math.max(item.ctr * 100, 1), 100) : 0
-        const title = valid ? `曝光 UV ${{number.format(item.view_uv)}}` : '缺少 view_item 曝光数据'
+        const denominatorElement = item.denominator_element || item.element
+        const title = valid
+          ? `${{item.element}} 点击 UV ${{number.format(item.click_uv)}} ÷ ${{denominatorElement}} 曝光 UV ${{number.format(item.view_uv)}}`
+          : `缺少 ${{denominatorElement}} 的 view_item 曝光数据`
         return `<tr>
           <td><span class="cn-name">${{escapeHtml(item.name)}}</span><span class="en-name">${{escapeHtml(item.element)}}</span></td>
-          <td><div class="ctr-cell ${{valid ? '' : 'missing'}}" title="${{title}}"><span class="ctr-bar" style="width:${{width}}%"></span><span class="ctr-text">${{rateText}}</span></div></td>
+          <td><div class="ctr-cell ${{valid ? '' : 'missing'}}" title="${{escapeHtml(title)}}"><span class="ctr-bar" style="width:${{width}}%"></span><span class="ctr-text">${{rateText}}</span></div></td>
           <td>${{number.format(item.click_uv)}}</td>
         </tr>`
       }}).join('') : '<tr><td colspan="3"><div class="empty">没有匹配的埋点</div></td></tr>'
@@ -470,6 +493,7 @@ def build_payload(csv_path: Path, feishu_url: str) -> dict:
         },
         "dates": sorted(daily),
         "daily": daily,
+        "ctr_denominator_overrides": CTR_DENOMINATOR_OVERRIDES,
     }
 
 
