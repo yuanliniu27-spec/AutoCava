@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cavi 交互数据日报</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182033;
+      --muted: #6f7788;
+      --line: #e6e9f0;
+      --surface: rgba(255,255,255,.92);
+      --purple: #7557e8;
+      --purple-soft: #eee9ff;
+      --cyan: #23b7c9;
+      --cyan-soft: #dcf7fa;
+      --shadow: 0 18px 52px rgba(31, 39, 62, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(117,87,232,.14), transparent 28rem),
+        radial-gradient(circle at 93% 11%, rgba(35,183,201,.12), transparent 26rem),
+        #f6f7fb;
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+    }
+    button, input, select { font: inherit; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 54px 0 76px; }
+    .eyebrow { margin: 0 0 12px; color: var(--purple); font-size: 12px; font-weight: 800; letter-spacing: .16em; }
+    .hero { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 28px; }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spacing: -.045em; }
+    .subtitle { margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .date-control { min-width: 208px; }
+    .date-control label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    select, .search-input {
+      width: 100%; border: 1px solid #d9deea; border-radius: 13px; background: rgba(255,255,255,.9);
+      color: var(--ink); outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    select { padding: 12px 40px 12px 14px; cursor: pointer; }
+    select:focus, .search-input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px rgba(117,87,232,.12); }
+    .notice { display: flex; gap: 9px; align-items: center; margin-bottom: 18px; color: #5b5670; font-size: 12px; }
+    .notice-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 0 5px rgba(117,87,232,.1); }
+    .card { margin-top: 22px; padding: 26px; border: 1px solid rgba(222,225,235,.9); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(14px); }
+    .card-head { display: flex; justify-content: space-between; gap: 22px; align-items: flex-start; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+    .card-description { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
+    .metrics { display: flex; gap: 24px; flex-wrap: wrap; }
+    .metric { min-width: 82px; }
+    .metric strong { display: block; font-size: 22px; letter-spacing: -.03em; }
+    .metric span { color: var(--muted); font-size: 11px; }
+    .ranking { display: grid; gap: 13px; }
+    .source-row { display: grid; grid-template-columns: minmax(110px, 180px) 1fr 76px; align-items: center; gap: 14px; }
+    .source-name { overflow: hidden; font-size: 13px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+    .track { height: 10px; overflow: hidden; border-radius: 99px; background: #eef0f5; }
+    .source-fill { height: 100%; min-width: 3px; border-radius: inherit; background: linear-gradient(90deg, #8871ef, #43c1d1); }
+    .source-value { text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 750; }
+    .search-wrap { width: min(340px, 100%); }
+    .search-input { padding: 11px 14px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 15px; }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    th { padding: 12px 16px; background: #f7f8fb; color: var(--muted); text-align: left; font-size: 11px; letter-spacing: .04em; }
+    th:nth-child(2), td:nth-child(2) { width: 260px; }
+    th:last-child, td:last-child { width: 110px; text-align: right; }
+    td { padding: 14px 16px; border-top: 1px solid var(--line); vertical-align: middle; font-size: 13px; }
+    .cn-name { display: block; font-weight: 700; }
+    .en-name { display: block; margin-top: 4px; color: #8a91a0; font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .ctr-cell { position: relative; overflow: hidden; border-radius: 9px; background: #f1f2f7; }
+    .ctr-bar { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: linear-gradient(90deg, rgba(117,87,232,.28), rgba(35,183,201,.28)); }
+    .ctr-text { position: relative; z-index: 1; display: block; padding: 8px 10px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .missing { color: #9299a8; background: repeating-linear-gradient(135deg,#f6f7f9,#f6f7f9 6px,#eceef2 6px,#eceef2 12px); }
+    .empty { padding: 34px 18px; color: var(--muted); text-align: center; font-size: 13px; }
+    .footnote { margin: 18px 2px 0; color: #89909e; font-size: 11px; line-height: 1.7; }
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 24px, 1120px); padding: 34px 0 48px; }
+      .hero, .card-head { display: block; }
+      .date-control, .search-wrap { width: 100%; margin-top: 18px; }
+      .card { padding: 18px; border-radius: 18px; }
+      .metrics { margin-top: 18px; gap: 18px; }
+      .source-row { grid-template-columns: 92px 1fr 58px; gap: 9px; }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">CAVI ANALYTICS · DAILY</p>
+        <h1>交互数据日报</h1>
+        <p class="subtitle">查看用户来源点击表现与埋点点击率分布，数据按选择日期独立汇总。</p>
+      </div>
+      <div class="date-control">
+        <label for="reportDate">统计日期</label>
+        <select id="reportDate" aria-label="选择统计日期"></select>
+      </div>
+    </header>
+    <div class="notice"><span class="notice-dot"></span><span>统计口径：Total users 按日累计；不进行跨日用户去重。</span></div>
+
+    <section class="card" aria-labelledby="sourceTitle">
+      <div class="card-head">
+        <div><h2 id="sourceTitle">用户来源 · 点击 UV</h2><p class="card-description">按 Content Group 汇总当日 click 事件，由高到低排列。</p></div>
+        <div class="metrics"><div class="metric"><strong id="sourceTotal">0</strong><span>点击 UV 累计</span></div><div class="metric"><strong id="sourceCount">0</strong><span>来源数量</span></div></div>
+      </div>
+      <div id="sourceRanking" class="ranking"></div>
+    </section>
+
+    <section class="card" aria-labelledby="ctrTitle">
+      <div class="card-head">
+        <div><h2 id="ctrTitle">埋点点击率 · 由高到低</h2><p class="card-description">点击率 = click 的 Total users ÷ view_item 的 Total users。</p></div>
+        <div class="search-wrap"><label for="elementSearch" style="position:absolute;left:-9999px">模糊搜索埋点名称</label><input id="elementSearch" class="search-input" type="search" placeholder="搜索中文或英文埋点名称…" autocomplete="off"></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>埋点名称</th><th>点击率</th><th>点击 UV</th></tr></thead>
+          <tbody id="ctrTableBody"></tbody>
+        </table>
+      </div>
+      <p id="resultNote" class="footnote"></p>
+    </section>
+  </main>
+
+  <script id="dashboardData" type="application/json">{"meta":{"title":"Cavi 交互数据日报","source_file":"download (8).csv","date_min":"20260724","date_max":"20260806","generated_at":"2026-08-07T08:47:04.968280+00:00","mapping_coverage":{"mapped":30,"total":30}},"dates":["20260724","20260725","20260726","20260727","20260728","20260729","20260730","20260731","20260801","20260802","20260803","20260804","20260805","20260806"],"daily":{"20260724":{"sources":[{"name":"销量榜","click_uv":455},{"name":"other","click_uv":10},{"name":"(not set)","click_uv":6},{"name":"车系页","click_uv":3},{"name":"产品库","click_uv":2},{"name":"贷款页","click_uv":2},{"name":"车型页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":73,"view_uv":348,"ctr":0.20977011494252873},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":52,"view_uv":343,"ctr":0.15160349854227406},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":36,"view_uv":617,"ctr":0.05834683954619125},{"element":"caviaix_entry_bottom_bar","name":"底barAI入口点击","click_uv":2,"view_uv":54,"ctr":0.037037037037037035},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":4,"view_uv":616,"ctr":0.006493506493506494},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":6,"view_uv":1138,"ctr":0.005272407732864675},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":6,"view_uv":3211,"ctr":0.0018685767673621925},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":6,"view_uv":3572,"ctr":0.0016797312430011197},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":167,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":101,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":14,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":6,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":6,"view_uv":0,"ctr":null}]},"20260725":{"sources":[{"name":"销量榜","click_uv":568},{"name":"(not set)","click_uv":3},{"name":"other","click_uv":3},{"name":"产品库","click_uv":2},{"name":"车系页","click_uv":2}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":109,"view_uv":457,"ctr":0.23851203501094093},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":71,"view_uv":442,"ctr":0.16063348416289594},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":38,"view_uv":670,"ctr":0.056716417910447764},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":3,"view_uv":617,"ctr":0.004862236628849271},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":10,"view_uv":3538,"ctr":0.002826455624646693},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":8,"view_uv":3895,"ctr":0.0020539152759948653},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":2,"view_uv":1278,"ctr":0.001564945226917058},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":184,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":132,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":9,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":7,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null}]},"20260726":{"sources":[{"name":"销量榜","click_uv":718},{"name":"other","click_uv":8},{"name":"车系页","click_uv":8},{"name":"车型页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_option_btn","name":"AI会话浮层消息选项按钮点击","click_uv":2,"view_uv":3,"ctr":0.6666666666666666},{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":137,"view_uv":616,"ctr":0.2224025974025974},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":106,"view_uv":605,"ctr":0.17520661157024794},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":52,"view_uv":791,"ctr":0.06573957016434892},{"element":"caviaix_entry_bottom_bar","name":"底barAI入口点击","click_uv":1,"view_uv":58,"ctr":0.017241379310344827},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":23,"view_uv":4859,"ctr":0.004733484256019757},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":8,"view_uv":1726,"ctr":0.004634994206257242},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":4,"view_uv":868,"ctr":0.004608294930875576},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":14,"view_uv":5344,"ctr":0.002619760479041916},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":195,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":161,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":17,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":10,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null}]},"20260727":{"sources":[{"name":"销量榜","click_uv":605},{"name":"other","click_uv":17},{"name":"车系页","click_uv":10}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":112,"view_uv":510,"ctr":0.2196078431372549},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":76,"view_uv":495,"ctr":0.15353535353535352},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":37,"view_uv":671,"ctr":0.05514157973174367},{"element":"caviaix_entry_bottom_bar","name":"底barAI入口点击","click_uv":2,"view_uv":47,"ctr":0.0425531914893617},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":5,"view_uv":740,"ctr":0.006756756756756757},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":6,"view_uv":1500,"ctr":0.004},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":13,"view_uv":4086,"ctr":0.0031815956926089083},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":11,"view_uv":4511,"ctr":0.002438483706495234},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":183,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":147,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":20,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":12,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":7,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_next_btn","name":"预审填写弹层继续按钮点击","click_uv":1,"view_uv":0,"ctr":null}]},"20260728":{"sources":[{"name":"销量榜","click_uv":613},{"name":"other","click_uv":12},{"name":"车系页","click_uv":10},{"name":"车型页","click_uv":3},{"name":"品牌页","click_uv":2}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":120,"view_uv":532,"ctr":0.22556390977443608},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":79,"view_uv":517,"ctr":0.1528046421663443},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":46,"view_uv":669,"ctr":0.0687593423019432},{"element":"caviaix_entry_bottom_bar","name":"底barAI入口点击","click_uv":2,"view_uv":67,"ctr":0.029850746268656716},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":18,"view_uv":1391,"ctr":0.012940330697340043},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":7,"view_uv":713,"ctr":0.009817671809256662},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":20,"view_uv":3668,"ctr":0.0054525627044711015},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":16,"view_uv":4104,"ctr":0.003898635477582846},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":174,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":127,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":15,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":11,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null}]},"20260729":{"sources":[{"name":"销量榜","click_uv":679},{"name":"other","click_uv":9},{"name":"车系页","click_uv":9},{"name":"产品库","click_uv":1}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":143,"view_uv":536,"ctr":0.2667910447761194},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":89,"view_uv":543,"ctr":0.16390423572744015},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":53,"view_uv":707,"ctr":0.07496463932107496},{"element":"caviaix_entry_bottom_bar","name":"底barAI入口点击","click_uv":1,"view_uv":53,"ctr":0.018867924528301886},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":11,"view_uv":1359,"ctr":0.008094186902133923},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":4,"view_uv":743,"ctr":0.005383580080753701},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":17,"view_uv":4135,"ctr":0.004111245465538089},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":13,"view_uv":3727,"ctr":0.00348806010195868},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":196,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":138,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":14,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":11,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":8,"view_uv":0,"ctr":null}]},"20260730":{"sources":[{"name":"销量榜","click_uv":595},{"name":"other","click_uv":71},{"name":"车系页","click_uv":13},{"name":"产品库","click_uv":8},{"name":"品牌页","click_uv":2},{"name":"车型页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_option_btn","name":"AI会话浮层消息选项按钮点击","click_uv":3,"view_uv":6,"ctr":0.5},{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":125,"view_uv":482,"ctr":0.25933609958506226},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":5,"view_uv":30,"ctr":0.16666666666666666},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":61,"view_uv":470,"ctr":0.12978723404255318},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":26,"view_uv":367,"ctr":0.07084468664850137},{"element":"caviaix_pre_approval_apply_btn","name":"AI消息填写预审入口点击","click_uv":1,"view_uv":15,"ctr":0.06666666666666667},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":27,"view_uv":573,"ctr":0.04712041884816754},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":17,"view_uv":454,"ctr":0.037444933920704845},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":15,"view_uv":456,"ctr":0.03289473684210526},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":65,"view_uv":4131,"ctr":0.015734688937303315},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":8,"view_uv":658,"ctr":0.0121580547112462},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":7,"view_uv":1246,"ctr":0.0056179775280898875},{"element":"caviaix_entry_fab","name":"AI悬浮球点击","click_uv":2,"view_uv":4211,"ctr":0.0004749465685110425},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":165,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":116,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":15,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":12,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":9,"view_uv":0,"ctr":null},{"element":"caviaix_like_layer_option_btn","name":"AI会话浮层会话结果点赞按钮点击","click_uv":5,"view_uv":0,"ctr":null},{"element":"caviaix_dislike_layer_option_btn","name":"AI会话浮层会话结果点踩按钮点击","click_uv":3,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_next_btn","name":"预审填写弹层继续按钮点击","click_uv":2,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_prev_btn","name":"预审填写弹层上一步按钮点击","click_uv":1,"view_uv":0,"ctr":null}]},"20260731":{"sources":[{"name":"销量榜","click_uv":713},{"name":"other","click_uv":31},{"name":"筛选页","click_uv":8},{"name":"车系页","click_uv":6},{"name":"产品库","click_uv":5},{"name":"贷款页","click_uv":3}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":109,"view_uv":465,"ctr":0.23440860215053763},{"element":"caviaix_session_layer_option_btn","name":"AI会话浮层消息选项按钮点击","click_uv":1,"view_uv":5,"ctr":0.2},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":6,"view_uv":42,"ctr":0.14285714285714285},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":55,"view_uv":459,"ctr":0.11982570806100218},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":41,"view_uv":597,"ctr":0.06867671691792294},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":38,"view_uv":585,"ctr":0.06495726495726496},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":24,"view_uv":738,"ctr":0.032520325203252036},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":97,"view_uv":4531,"ctr":0.021408077687044804},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":13,"view_uv":733,"ctr":0.017735334242837655},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":6,"view_uv":746,"ctr":0.00804289544235925},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":7,"view_uv":1272,"ctr":0.00550314465408805},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":201,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":143,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":13,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":7,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null}]},"20260801":{"sources":[{"name":"销量榜","click_uv":723},{"name":"车系页","click_uv":4},{"name":"产品库","click_uv":1},{"name":"筛选页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_option_btn","name":"AI会话浮层消息选项按钮点击","click_uv":1,"view_uv":2,"ctr":0.5},{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":125,"view_uv":524,"ctr":0.2385496183206107},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":66,"view_uv":523,"ctr":0.12619502868068833},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":39,"view_uv":574,"ctr":0.06794425087108014},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":36,"view_uv":574,"ctr":0.0627177700348432},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":2,"view_uv":34,"ctr":0.058823529411764705},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":16,"view_uv":692,"ctr":0.023121387283236993},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":104,"view_uv":4940,"ctr":0.021052631578947368},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":7,"view_uv":688,"ctr":0.010174418604651164},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":10,"view_uv":1316,"ctr":0.007598784194528876},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":4,"view_uv":697,"ctr":0.005738880918220947},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":184,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":112,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":10,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":9,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":4,"view_uv":0,"ctr":null}]},"20260802":{"sources":[{"name":"销量榜","click_uv":775},{"name":"other","click_uv":5},{"name":"车系页","click_uv":3}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":131,"view_uv":513,"ctr":0.2553606237816764},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":65,"view_uv":520,"ctr":0.125},{"element":"caviaix_pre_approval_apply_btn","name":"AI消息填写预审入口点击","click_uv":1,"view_uv":9,"ctr":0.1111111111111111},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":3,"view_uv":39,"ctr":0.07692307692307693},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":47,"view_uv":644,"ctr":0.07298136645962733},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":41,"view_uv":602,"ctr":0.0681063122923588},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":16,"view_uv":717,"ctr":0.022315202231520222},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":15,"view_uv":717,"ctr":0.02092050209205021},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":99,"view_uv":5192,"ctr":0.019067796610169493},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":3,"view_uv":728,"ctr":0.004120879120879121},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":2,"view_uv":1433,"ctr":0.0013956734124214933},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":199,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":146,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":7,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":6,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":2,"view_uv":0,"ctr":null}]},"20260803":{"sources":[{"name":"销量榜","click_uv":671},{"name":"other","click_uv":18},{"name":"产品库","click_uv":5},{"name":"车系页","click_uv":5},{"name":"筛选页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":71,"view_uv":296,"ctr":0.23986486486486486},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":7,"view_uv":51,"ctr":0.13725490196078433},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":42,"view_uv":309,"ctr":0.13592233009708737},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":53,"view_uv":611,"ctr":0.0867430441898527},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":36,"view_uv":589,"ctr":0.06112054329371817},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":28,"view_uv":744,"ctr":0.03763440860215054},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":22,"view_uv":730,"ctr":0.030136986301369864},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":15,"view_uv":742,"ctr":0.02021563342318059},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":84,"view_uv":4776,"ctr":0.017587939698492462},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":1,"view_uv":1272,"ctr":0.0007861635220125787},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":184,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":128,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":14,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":9,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null},{"element":"caviaix_like_layer_option_btn","name":"AI会话浮层会话结果点赞按钮点击","click_uv":1,"view_uv":0,"ctr":null}]},"20260804":{"sources":[{"name":"销量榜","click_uv":759},{"name":"other","click_uv":16},{"name":"产品库","click_uv":5},{"name":"车系页","click_uv":2}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":73,"view_uv":275,"ctr":0.26545454545454544},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":51,"view_uv":297,"ctr":0.1717171717171717},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":7,"view_uv":43,"ctr":0.16279069767441862},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":55,"view_uv":629,"ctr":0.08744038155802862},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":46,"view_uv":667,"ctr":0.06896551724137931},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":43,"view_uv":753,"ctr":0.057104913678618856},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":25,"view_uv":735,"ctr":0.034013605442176874},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":90,"view_uv":5087,"ctr":0.017692156477295065},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":9,"view_uv":757,"ctr":0.011889035667107},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":6,"view_uv":1419,"ctr":0.004228329809725159},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":218,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":137,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":12,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":5,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":4,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_next_btn","name":"预审填写弹层继续按钮点击","click_uv":1,"view_uv":0,"ctr":null}]},"20260805":{"sources":[{"name":"销量榜","click_uv":596},{"name":"other","click_uv":20},{"name":"产品库","click_uv":5},{"name":"品牌页","click_uv":3},{"name":"车型页","click_uv":2},{"name":"车系页","click_uv":2}],"elements":[{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":49,"view_uv":235,"ctr":0.20851063829787234},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":32,"view_uv":252,"ctr":0.12698412698412698},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":55,"view_uv":548,"ctr":0.10036496350364964},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":36,"view_uv":570,"ctr":0.06315789473684211},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":2,"view_uv":39,"ctr":0.05128205128205128},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":29,"view_uv":673,"ctr":0.04309063893016345},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":17,"view_uv":658,"ctr":0.025835866261398176},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":88,"view_uv":4602,"ctr":0.01912212081703607},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":12,"view_uv":674,"ctr":0.017804154302670624},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":5,"view_uv":1328,"ctr":0.0037650602409638554},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":158,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":118,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":11,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":8,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":6,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_prev_btn","name":"预审填写弹层上一步按钮点击","click_uv":1,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_form_next_btn","name":"预审填写弹层继续按钮点击","click_uv":1,"view_uv":0,"ctr":null}]},"20260806":{"sources":[{"name":"销量榜","click_uv":574},{"name":"other","click_uv":32},{"name":"贷款页","click_uv":5},{"name":"品牌页","click_uv":3},{"name":"车型页","click_uv":3},{"name":"筛选页","click_uv":1},{"name":"车系页","click_uv":1}],"elements":[{"element":"caviaix_session_layer_option_btn","name":"AI会话浮层消息选项按钮点击","click_uv":2,"view_uv":2,"ctr":1.0},{"element":"caviaix_session_layer_solution_item","name":"各页面AI会话浮层","click_uv":63,"view_uv":256,"ctr":0.24609375},{"element":"caviaix_session_layer_calculadora","name":"AI会话浮层输入框上方贷款试算按钮点击","click_uv":1,"view_uv":6,"ctr":0.16666666666666666},{"element":"caviaix_session_layer_follow_up_btn","name":"AI会话浮层引导追问按钮点击","click_uv":40,"view_uv":257,"ctr":0.1556420233463035},{"element":"caviaix_session_layer_wordclouds","name":"AI会话浮层Cavi词云标签点击","click_uv":49,"view_uv":460,"ctr":0.10652173913043478},{"element":"cavaiaix_series_price_entry","name":"AI金融入口点击","click_uv":27,"view_uv":478,"ctr":0.056485355648535567},{"element":"caviaix_session_layer_sugeridos","name":"AI会话浮层输入框上方选车推荐按钮曝光","click_uv":24,"view_uv":546,"ctr":0.04395604395604396},{"element":"caviaix_session_layer_can","name":"AI会话浮层Cavi能力标签点击","click_uv":21,"view_uv":560,"ctr":0.0375},{"element":"caviaix_entry_fab_bubble","name":"AI悬浮球气泡点击","click_uv":78,"view_uv":3443,"ctr":0.022654661632297415},{"element":"caviaix_session_layer_finance","name":"AI会话浮层输入框上方预审按钮点击","click_uv":10,"view_uv":563,"ctr":0.017761989342806393},{"element":"caviaix_entry_module_card","name":"AI入口模块卡片点击","click_uv":9,"view_uv":1147,"ctr":0.007846556233653008},{"element":"caviaix_session_layer_close","name":"AI会话浮层收起按钮点击","click_uv":166,"view_uv":0,"ctr":null},{"element":"caviaix_entry_fab_bubble_close","name":"AI悬浮球气泡关闭按钮点击","click_uv":102,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_input_box","name":"AI会话浮层输入框点击","click_uv":9,"view_uv":0,"ctr":null},{"element":"caviaix_pre_approval_lead_continue_btn","name":"金融机构留资页继续按钮点击","click_uv":7,"view_uv":0,"ctr":null},{"element":"caviaix_session_layer_send_btn","name":"AI会话浮层输入框有效发送按钮点击","click_uv":6,"view_uv":0,"ctr":null},{"element":"caviaix_like_layer_option_btn","name":"AI会话浮层会话结果点赞按钮点击","click_uv":4,"view_uv":0,"ctr":null},{"element":"caviaix_dislike_layer_option_btn","name":"AI会话浮层会话结果点踩按钮点击","click_uv":1,"view_uv":0,"ctr":null}]}}}</script>
+  <script>
+    const payload = JSON.parse(document.getElementById('dashboardData').textContent)
+    const reportDate = document.getElementById('reportDate')
+    const sourceRanking = document.getElementById('sourceRanking')
+    const sourceTotal = document.getElementById('sourceTotal')
+    const sourceCount = document.getElementById('sourceCount')
+    const elementSearch = document.getElementById('elementSearch')
+    const ctrTableBody = document.getElementById('ctrTableBody')
+    const resultNote = document.getElementById('resultNote')
+    const number = new Intl.NumberFormat('zh-CN')
+
+    function labelDate(raw) {
+      return `${raw.slice(0,4)}-${raw.slice(4,6)}-${raw.slice(6,8)}`
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[char])
+    }
+
+    function renderSources(day) {
+      const sources = day.sources || []
+      const total = sources.reduce((sum, item) => sum + item.click_uv, 0)
+      const max = Math.max(...sources.map(item => item.click_uv), 1)
+      sourceTotal.textContent = number.format(total)
+      sourceCount.textContent = number.format(sources.length)
+      sourceRanking.innerHTML = sources.length ? sources.map((item, index) => `
+        <div class="source-row">
+          <div class="source-name" title="${escapeHtml(item.name)}">${index + 1}. ${escapeHtml(item.name)}</div>
+          <div class="track" aria-hidden="true"><div class="source-fill" style="width:${Math.max(item.click_uv / max * 100, 1)}%"></div></div>
+          <div class="source-value">${number.format(item.click_uv)}</div>
+        </div>`).join('') : '<div class="empty">该日期没有点击来源数据</div>'
+    }
+
+    function renderElements(day) {
+      const query = elementSearch.value.trim().toLocaleLowerCase()
+      const all = day.elements || []
+      const filtered = all.filter(item => !query || item.name.toLocaleLowerCase().includes(query) || item.element.toLocaleLowerCase().includes(query))
+      ctrTableBody.innerHTML = filtered.length ? filtered.map(item => {
+        const valid = Number.isFinite(item.ctr)
+        const rateText = valid ? `${(item.ctr * 100).toFixed(1)}%` : '—'
+        const width = valid ? Math.min(Math.max(item.ctr * 100, 1), 100) : 0
+        const title = valid ? `曝光 UV ${number.format(item.view_uv)}` : '缺少 view_item 曝光数据'
+        return `<tr>
+          <td><span class="cn-name">${escapeHtml(item.name)}</span><span class="en-name">${escapeHtml(item.element)}</span></td>
+          <td><div class="ctr-cell ${valid ? '' : 'missing'}" title="${title}"><span class="ctr-bar" style="width:${width}%"></span><span class="ctr-text">${rateText}</span></div></td>
+          <td>${number.format(item.click_uv)}</td>
+        </tr>`
+      }).join('') : '<tr><td colspan="3"><div class="empty">没有匹配的埋点</div></td></tr>'
+      const missing = filtered.filter(item => !Number.isFinite(item.ctr)).length
+      resultNote.textContent = `显示 ${filtered.length} / ${all.length} 个点击埋点${missing ? `；其中 ${missing} 个缺少曝光分母` : ''}。点击率排序使用未四舍五入的原始值。`
+    }
+
+    function render() {
+      const day = payload.daily[reportDate.value] || {sources: [], elements: []}
+      renderSources(day)
+      renderElements(day)
+    }
+
+    payload.dates.slice().reverse().forEach(date => {
+      const option = document.createElement('option')
+      option.value = date
+      option.textContent = labelDate(date)
+      reportDate.appendChild(option)
+    })
+    reportDate.value = payload.dates[payload.dates.length - 1]
+    reportDate.addEventListener('change', render)
+    elementSearch.addEventListener('input', () => renderElements(payload.daily[reportDate.value] || {elements: []}))
+    render()
+  </script>
+</body>
+</html>
