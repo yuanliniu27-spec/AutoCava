@@ -61,6 +61,28 @@ other,ignored,20260806,销量榜,999,
         self.assertAlmostEqual(ranged["elements"][0]["ctr"], 20 / 300)
         self.assertEqual(len(ranged["elements"]), 1)
 
+    def test_aggregate_range_uses_special_ctr_denominators(self):
+        rows = [
+            {"event": "click", "element": "caviaix_session_layer_close", "date": "20260806", "group": "AI", "uv": 10},
+            {"event": "view_item", "element": "caviaix_session_layer_close", "date": "20260806", "group": "AI", "uv": 999},
+            {"event": "click", "element": "caviaix_session_layer_input_box", "date": "20260806", "group": "AI", "uv": 20},
+            {"event": "view_item", "element": "caviaix_session_layer", "date": "20260806", "group": "AI", "uv": 200},
+            {"event": "click", "element": "caviaix_dislike_layer_option_btn", "date": "20260806", "group": "AI", "uv": 30},
+            {"event": "click", "element": "caviaix_like_layer_option_btn", "date": "20260806", "group": "AI", "uv": 40},
+            {"event": "view_item", "element": "caviaix_like_layer_option_btn", "date": "20260806", "group": "AI", "uv": 888},
+            {"event": "view_item", "element": "caviaix_likeorno_layer_option_btn", "date": "20260806", "group": "AI", "uv": 100},
+        ]
+        ranged = aggregate_range(aggregate_daily(rows, {}), "20260806", "20260806")
+        elements = {item["element"]: item for item in ranged["elements"]}
+
+        self.assertEqual(elements["caviaix_session_layer_close"]["view_uv"], 200)
+        self.assertEqual(elements["caviaix_session_layer_close"]["denominator_element"], "caviaix_session_layer")
+        self.assertEqual(elements["caviaix_session_layer_close"]["ctr"], 10 / 200)
+        self.assertEqual(elements["caviaix_session_layer_input_box"]["ctr"], 20 / 200)
+        self.assertEqual(elements["caviaix_dislike_layer_option_btn"]["view_uv"], 100)
+        self.assertEqual(elements["caviaix_dislike_layer_option_btn"]["ctr"], 30 / 100)
+        self.assertEqual(elements["caviaix_like_layer_option_btn"]["ctr"], 40 / 100)
+
 
 class MappingTests(unittest.TestCase):
     def test_mapping_prefers_click_name(self):

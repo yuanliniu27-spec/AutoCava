@@ -15,6 +15,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+CTR_DENOMINATOR_OVERRIDES = {
+    "caviaix_session_layer_close": "caviaix_session_layer",
+    "caviaix_session_layer_input_box": "caviaix_session_layer",
+    "caviaix_dislike_layer_option_btn": "caviaix_likeorno_layer_option_btn",
+    "caviaix_like_layer_option_btn": "caviaix_likeorno_layer_option_btn",
+}
+
+
 def parse_cavi_csv_rows(path: Path) -> list[dict]:
     with path.open(encoding="utf-8-sig", newline="") as source:
         records = list(csv.reader(source))
@@ -92,7 +100,12 @@ def aggregate_daily(rows: list[dict], names: dict[str, str]) -> dict[str, dict]:
     return output
 
 
-def aggregate_range(daily: dict[str, dict], start: str, end: str) -> dict:
+def aggregate_range(
+    daily: dict[str, dict],
+    start: str,
+    end: str,
+    denominator_overrides: dict[str, str] = CTR_DENOMINATOR_OVERRIDES,
+) -> dict:
     """Combine daily results for an inclusive YYYYMMDD range."""
     source_totals = Counter()
     element_totals = {}
@@ -114,9 +127,14 @@ def aggregate_range(daily: dict[str, dict], start: str, end: str) -> dict:
     for element, item in element_totals.items():
         if item["click_uv"] == 0:
             continue
+        denominator_element = denominator_overrides.get(element, element)
+        denominator = element_totals.get(denominator_element)
+        view_uv = denominator["view_uv"] if denominator else 0
         item = dict(item)
         item["element"] = element
-        item["ctr"] = item["click_uv"] / item["view_uv"] if item["view_uv"] else None
+        item["view_uv"] = view_uv
+        item["denominator_element"] = denominator_element
+        item["ctr"] = item["click_uv"] / view_uv if view_uv else None
         elements.append(item)
     elements.sort(
         key=lambda item: (
