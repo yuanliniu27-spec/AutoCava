@@ -71,8 +71,6 @@ def aggregate_daily(rows: list[dict], names: dict[str, str]) -> dict[str, dict]:
         for element, counts in values["elements"].items():
             click_uv = counts["click"]
             view_uv = counts["view"]
-            if click_uv == 0:
-                continue
             elements.append(
                 {
                     "element": element,
@@ -114,6 +112,8 @@ def aggregate_range(daily: dict[str, dict], start: str, end: str) -> dict:
     sources.sort(key=lambda item: (-item["click_uv"], item["name"]))
     elements = []
     for element, item in element_totals.items():
+        if item["click_uv"] == 0:
+            continue
         item = dict(item)
         item["element"] = element
         item["ctr"] = item["click_uv"] / item["view_uv"] if item["view_uv"] else None
@@ -375,7 +375,7 @@ def render_html(payload: dict) -> str:
         }})
       }})
       const sources = [...sourceTotals].map(([name, click_uv]) => ({{name, click_uv}})).sort((a,b) => b.click_uv - a.click_uv || a.name.localeCompare(b.name))
-      const elements = [...elementTotals.values()].map(item => ({{...item, ctr: item.view_uv ? item.click_uv / item.view_uv : null}})).sort((a,b) => (a.ctr === null) - (b.ctr === null) || (b.ctr || 0) - (a.ctr || 0) || b.click_uv - a.click_uv || a.name.localeCompare(b.name))
+      const elements = [...elementTotals.values()].filter(item => item.click_uv > 0).map(item => ({{...item, ctr: item.view_uv ? item.click_uv / item.view_uv : null}})).sort((a,b) => (a.ctr === null) - (b.ctr === null) || (b.ctr || 0) - (a.ctr || 0) || b.click_uv - a.click_uv || a.name.localeCompare(b.name))
       return {{keys, sources, elements}}
     }}
 

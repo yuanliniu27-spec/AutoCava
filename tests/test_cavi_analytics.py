@@ -46,19 +46,20 @@ other,ignored,20260806,销量榜,999,
 
     def test_aggregate_range_sums_selected_dates_only(self):
         rows = [
-            {"event": "click", "element": "a", "date": "20260805", "group": "销量榜", "uv": 10},
             {"event": "view_item", "element": "a", "date": "20260805", "group": "销量榜", "uv": 100},
             {"event": "click", "element": "a", "date": "20260806", "group": "销量榜", "uv": 20},
             {"event": "view_item", "element": "a", "date": "20260806", "group": "销量榜", "uv": 200},
             {"event": "click", "element": "a", "date": "20260807", "group": "销量榜", "uv": 999},
             {"event": "view_item", "element": "a", "date": "20260807", "group": "销量榜", "uv": 999},
+            {"event": "view_item", "element": "b", "date": "20260805", "group": "销量榜", "uv": 50},
         ]
         daily = aggregate_daily(rows, {"a": "测试按钮点击"})
         ranged = aggregate_range(daily, "20260805", "20260806")
-        self.assertEqual(ranged["sources"], [{"name": "销量榜", "click_uv": 30}])
-        self.assertEqual(ranged["elements"][0]["click_uv"], 30)
+        self.assertEqual(ranged["sources"], [{"name": "销量榜", "click_uv": 20}])
+        self.assertEqual(ranged["elements"][0]["click_uv"], 20)
         self.assertEqual(ranged["elements"][0]["view_uv"], 300)
-        self.assertEqual(ranged["elements"][0]["ctr"], 0.1)
+        self.assertAlmostEqual(ranged["elements"][0]["ctr"], 20 / 300)
+        self.assertEqual(len(ranged["elements"]), 1)
 
 
 class MappingTests(unittest.TestCase):
