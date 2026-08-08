@@ -4,7 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const htmlPath = path.join(root, 'cavi-analytics.html')
+const htmlPath = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, 'cavi-analytics.html')
 const html = fs.readFileSync(htmlPath, 'utf8')
 
 assert.match(html, /id="rangeStart"/)

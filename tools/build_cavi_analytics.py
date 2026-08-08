@@ -11,6 +11,7 @@ import json
 import re
 import subprocess
 from collections import Counter, defaultdict
+from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -211,6 +212,71 @@ def build_element_mapping(rows: list[list[str]]) -> dict[str, str]:
 
 def _safe_json(value: dict) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+
+
+def load_dashboard_payload(path: Path) -> dict:
+    """Read the JSON snapshot embedded in a generated dashboard."""
+    document = path.read_text(encoding="utf-8")
+    match = re.search(
+        r"<script[^>]*\bid=[\"']dashboardData[\"'][^>]*>(.*?)</script>",
+        document,
+        re.S,
+    )
+    if not match:
+        raise ValueError("现有页面中未找到 dashboardData")
+    payload = json.loads(match.group(1))
+    if not isinstance(payload, dict):
+        raise ValueError("现有页面 dashboardData 格式无效")
+    return payload
+
+
+def merge_incremental_payload(
+    existing: dict,
+    rows: list[dict],
+    names: dict[str, str],
+    source_file: str,
+) -> dict:
+    """Replace one exported date in an existing dashboard payload."""
+    target_dates = sorted({row["date"] for row in rows})
+    if len(target_dates) != 1:
+        raise ValueError("增量 CSV 必须且只能包含一个有效日期")
+    target_date = target_dates[0]
+    new_daily = aggregate_daily(rows, names)
+    if target_date not in new_daily:
+        raise ValueError("增量 CSV 中没有可用的 click/view_item 数据")
+
+    existing_daily = existing.get("daily")
+    if not isinstance(existing_daily, dict) or not existing_daily:
+        raise ValueError("现有页面缺少可合并的 daily 历史数据")
+
+    merged_daily = deepcopy(existing_daily)
+    merge_action = "replaced" if target_date in merged_daily else "added"
+    merged_daily[target_date] = new_daily[target_date]
+    dates = sorted(merged_daily)
+    elements = {
+        item["element"]
+        for day in merged_daily.values()
+        for item in day.get("elements", [])
+    }
+    mapped = sum(element in names for element in elements)
+
+    payload = deepcopy(existing)
+    payload["daily"] = merged_daily
+    payload["dates"] = dates
+    payload["ctr_denominator_overrides"] = CTR_DENOMINATOR_OVERRIDES
+    payload["meta"] = {
+        **existing.get("meta", {}),
+        "title": "AI 所有埋点事件统计",
+        "source_file": source_file,
+        "date_min": dates[0],
+        "date_max": dates[-1],
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "mapping_coverage": {"mapped": mapped, "total": len(elements)},
+        "target_date": target_date,
+        "merge_action": merge_action,
+        "retained_dates": len(dates) - 1,
+    }
+    return payload
 
 
 def render_html(payload: dict) -> str:
@@ -475,11 +541,22 @@ def render_html(payload: dict) -> str:
 """
 
 
-def build_payload(csv_path: Path, feishu_url: str) -> dict:
+def build_payload(
+    csv_path: Path,
+    feishu_url: str,
+    existing_html: Path | None = None,
+) -> dict:
     rows = parse_cavi_csv_rows(csv_path)
     if not rows:
         raise ValueError("CSV 中没有可用的 click/view_item 数据")
     mapping = build_element_mapping(fetch_feishu_rows(feishu_url))
+    if existing_html is not None:
+        return merge_incremental_payload(
+            load_dashboard_payload(existing_html),
+            rows,
+            mapping,
+            csv_path.name,
+        )
     daily = aggregate_daily(rows, mapping)
     elements = sorted({row["element"] for row in rows})
     mapped = sum(element in mapping for element in elements)
@@ -502,17 +579,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", required=True, type=Path)
     parser.add_argument("--feishu-url", required=True)
+    parser.add_argument("--existing-html", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
 
-    payload = build_payload(args.csv, args.feishu_url)
+    payload = build_payload(args.csv, args.feishu_url, args.existing_html)
     args.output.write_text(render_html(payload), encoding="utf-8")
     source_count = len({source["name"] for day in payload["daily"].values() for source in day["sources"]})
     element_count = len({item["element"] for day in payload["daily"].values() for item in day["elements"]})
     coverage = payload["meta"]["mapping_coverage"]
     print(
         f"generated={args.output.resolve()} dates={len(payload['dates'])} "
-        f"sources={source_count} elements={element_count} mapping={coverage['mapped']}/{coverage['total']}"
+        f"sources={source_count} elements={element_count} mapping={coverage['mapped']}/{coverage['total']} "
+        f"target={payload['meta'].get('target_date', '-')} action={payload['meta'].get('merge_action', 'rebuilt')}"
     )
 
 
